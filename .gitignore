@@ -1,0 +1,10 @@
+.vscode
+minishell
+*.o
+*.a
+*.d
+*old
+*.out
+*test*
+*.DS_Store
+parser/parser
