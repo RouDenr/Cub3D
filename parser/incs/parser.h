@@ -6,7 +6,7 @@
 /*   By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:13:05 by vseel             #+#    #+#             */
-/*   Updated: 2022/06/16 23:18:41 by vseel            ###   ########.fr       */
+/*   Updated: 2022/06/18 21:22:02 by vseel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,14 @@ typedef struct s_list	t_list;
 
 /* parser */
 t_map	*parse_main(char *str);
+
+/* parser_exit_utils */
+int		throw_error(char *msg, int exit_code, char mode);
+
+/* parser_debug_utils */
+void	showbits(unsigned int x);
+void	visualize_dyarr(t_dyarr *arr);
+void	visualize_map(t_map *map);
 
 /* map functions */
 

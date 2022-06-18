@@ -6,8 +6,10 @@ D		=	deps
 NAME	=	parser.a
 NAME_BIN=	parser
 
-SRCS	=	parser.c						\
-			lstfuncs_dyarr_1.c				\
+SRCS	=	parser.c				\
+			parser_debug_utils.c	\
+			parser_exit_utils.c		\
+			lstfuncs_dyarr_1.c		\
 			lstfuncs_dyarr_2.c
 
 # SRCS	+=	main_opt.c
