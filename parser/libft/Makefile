@@ -6,7 +6,7 @@
 #    By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/08 15:41:45 by vseel             #+#    #+#              #
-#    Updated: 2022/05/19 22:22:33 by vseel            ###   ########.fr        #
+#    Updated: 2022/06/19 17:27:13 by vseel            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ OBJS	=	$(SRCS:.c=.o)
 HEAD	=	libft.h
 GNLHEAD	=	get_next_line.h
 
-CC		=	gcc
+CC		=	clang
 CFLAGS	=	-Wall -Wextra -Werror -g
 
 ARLIB	=	ar rcs

@@ -14,7 +14,7 @@ SRCS	=	parser.c				\
 
 # SRCS	+=	main_opt.c
 
-CC		=	gcc
+CC		=	clang
 
 CFLAGS	=	-Wall -Wextra -g
 # CFLAGS	=	-Wall -Wextra -Werror
