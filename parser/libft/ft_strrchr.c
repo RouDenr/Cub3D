@@ -6,7 +6,7 @@
 /*   By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 20:48:53 by vseel             #+#    #+#             */
-/*   Updated: 2021/10/16 14:15:29 by vseel            ###   ########.fr       */
+/*   Updated: 2022/06/22 21:46:57 by vseel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_strrchr(const char *s, int c)
 	{
 		if (*(ptr + i) == (unsigned char) c)
 			buf = ptr + i;
-		i++;
+		++i;
 	}
 	if (*(ptr + i) == (unsigned char) c)
 		buf = ptr + i;

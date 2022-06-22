@@ -6,7 +6,7 @@
 /*   By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:13:05 by vseel             #+#    #+#             */
-/*   Updated: 2022/06/18 21:22:02 by vseel            ###   ########.fr       */
+/*   Updated: 2022/06/22 22:23:37 by vseel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,13 @@ int		throw_error(char *msg, int exit_code, char mode);
 void	showbits(unsigned int x);
 void	visualize_dyarr(t_dyarr *arr);
 void	visualize_map(t_map *map);
+
+/* parser_map_validation */
+char	is_valid_map_line(char *line);
+char	parse_config_line(char *line, t_map *map);
+
+/* parser_file_utils */
+int		is_cub_extention(char *filename);
 
 /* map functions */
 
