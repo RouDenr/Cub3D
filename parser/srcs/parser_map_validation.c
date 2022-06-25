@@ -6,7 +6,7 @@
 /*   By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:13:10 by vseel             #+#    #+#             */
-/*   Updated: 2022/06/22 23:19:32 by vseel            ###   ########.fr       */
+/*   Updated: 2022/06/25 22:30:24 by vseel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,23 @@ int	double_arr_size(char **strs)
 		++size;
 	}
 	return (size);
+}
+
+void	double_arr_free(char **strs)
+{
+	char	*to_free;
+	char	**to_free_head;
+
+	if (!strs)
+		return ;
+	to_free_head = strs;
+	while (*strs)
+	{
+		to_free = *strs;
+		++strs;
+		free(to_free);
+	}
+	free(to_free_head);
 }
 
 char	is_valid_map_line(char *line)
@@ -49,15 +66,25 @@ char	get_texture_path(char **tmp, char **wall)
 {
 	if (*wall)
 	{
-		free(tmp[0]);
-		free(tmp[1]);
-		free(tmp);
+		double_arr_free(tmp);
 		return (throw_error("invalid config line: dublicated instruction", 0, 'm'));
 	}
-	// *wall = ft_strdup(tmp[1]);
 	*wall = ft_substr(tmp[1], 0, ft_strlen(tmp[1]) - 1);
 	if (!*wall)
 		return (throw_error("strdup failed", 0, 'm'));
+	return (1);
+}
+
+int	is_valid_color_str(char *str)
+{
+	int	length;
+
+	length = ft_strlen(str);
+	if (length > 3 || length == 0) 
+		return (0);
+	while (--length != -1)
+		if ((str[length] < '0' || str[length] > '9') && str[length] != '\n') // KOSTYL
+			return (0);
 	return (1);
 }
 
@@ -68,14 +95,23 @@ int	parse_color(char *str)
 
 	colors_str = ft_split(str, ',');
 	if (!colors_str)
-		return(throw_error("parse_color", -1, 'm'));
+		return (throw_error("parse_color", -1, 'm'));
+	if (double_arr_size(colors_str) != 3 
+		|| !is_valid_color_str(colors_str[0])
+		|| !is_valid_color_str(colors_str[1])
+		|| !is_valid_color_str(colors_str[2]))
+	{
+		double_arr_free(colors_str);
+		return (throw_error("invalid config line", -2, 'm'));
+	}
 	colors[0] = ft_atoi(colors_str[0]);
 	colors[1] = ft_atoi(colors_str[1]);
 	colors[2] = ft_atoi(colors_str[2]);
+	double_arr_free(colors_str);
 	if (colors[0] > 255 || colors[0] < 0
 		|| colors[1] > 255 || colors[1] < 0
 		|| colors[2] > 255 || colors[2] < 0)
-		return (-1);
+		return (throw_error("Colors allowed from 0 to 255 inc", -1, 'm'));
 
 	// TODO get this onto separate func
 	if (VISUALIZE_MAP)
@@ -95,14 +131,12 @@ char	get_color(char **tmp, int *color)
 {
 	if (*color != -2)
 	{
-		free(tmp[0]);
-		free(tmp[1]);
-		free(tmp);
+		double_arr_free(tmp);
 		return (throw_error("invalid config line: dublicated instruction", 0, 'm'));
 	}
 	*color = parse_color(tmp[1]);
 	if (*color == -1)
-		return (throw_error("Colors allowed from 0 to 255 inc", 16, 'm'));
+		return (0);
 	return (1);
 }
 
@@ -116,7 +150,10 @@ char	parse_config_line(char *line, t_map *map)
 	if (!tmp)
 		return (throw_error("split failed", 0, 'm'));
 	if (double_arr_size(tmp) != 2)
+	{
+		double_arr_free(tmp);
 		return (throw_error("invalid config line", 0, 'm'));
+	}
 	if (!ft_strncmp("NO", tmp[0], 2) && !get_texture_path(tmp, &map->wall_no))
 		return (0);
 	else if (!ft_strncmp("SO", tmp[0], 2) && !get_texture_path(tmp, &map->wall_so))

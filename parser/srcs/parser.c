@@ -6,12 +6,43 @@
 /*   By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:13:10 by vseel             #+#    #+#             */
-/*   Updated: 2022/06/22 23:15:32 by vseel            ###   ########.fr       */
+/*   Updated: 2022/06/25 20:51:20 by vseel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/parser.h"
 #include "../libft/libft.h"
+
+t_map	*create_and_fill_arr(t_map *map)
+{
+	int		arr_size;
+	t_dyarr	*arr;
+	int		i;
+
+	arr = map->map_arr_l;
+	arr_size = ft_lstsize_dyarr(arr);
+	if (arr_size != 0)
+	{
+		map->map_arr = malloc(sizeof (char *) * arr_size + 1);
+		if (!map->map_arr)
+			return (0);
+		i = 0;
+		while (arr)
+		{
+			map->map_arr[i++] = arr->line;
+			arr = arr->next;
+		}
+		map->map_arr[i] = NULL;
+	}
+	return (map);
+}
+
+t_map	*dyarr_to_arr(t_map *head_token)
+{
+	if (!create_and_fill_arr(head_token))
+		return (0);
+	return (head_token);
+}
 
 t_dyarr	*create_n_push_list(t_dyarr **arr_head, char *line)
 {
@@ -76,7 +107,7 @@ int	main(int argc, char **argv)
 			return (4);
 		line = get_next_line(map_fd);
 	}
-
+	create_and_fill_arr(&map);
 	visualize_map(&map);
 
 	if (close(map_fd))

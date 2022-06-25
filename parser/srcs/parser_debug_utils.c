@@ -6,7 +6,7 @@
 /*   By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:13:10 by vseel             #+#    #+#             */
-/*   Updated: 2022/06/18 21:23:16 by vseel            ###   ########.fr       */
+/*   Updated: 2022/06/25 20:54:42 by vseel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,11 @@ void	visualize_map(t_map *map)
 		printf("\tEA: %s\n", map->wall_ea);
 	printf("\tfloor: %d\n", map->color_floor);
 	printf("\tceil:  %d\n", map->color_ceil);
-	printf("map:\n");
+	printf("map dyarr:\n");
 	visualize_dyarr(map->map_arr_l);
+	printf("\n\nmap double array:\n");
+	while (map->map_arr && *map->map_arr)
+		printf("%s", *map->map_arr++);
 	printf("\n-------------------------------\n");
 	printf("\n");
 }
