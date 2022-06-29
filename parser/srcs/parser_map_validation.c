@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:13:10 by vseel             #+#    #+#             */
-/*   Updated: 2022/06/30 00:03:39 by decordel         ###   ########.fr       */
+/*   Updated: 2022/06/30 00:16:32 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ char	get_texture_path(char **tmp, char **wall)
 {
 	if (*wall)
 	{
-		// printf("%s\n", *wall);
 		double_arr_free(tmp);
 		return (throw_error("invalid config line: dublicated instruction", 0, 'm'));
 	}

@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 21:19:09 by decordel          #+#    #+#             */
-/*   Updated: 2022/06/30 00:08:27 by decordel         ###   ########.fr       */
+/*   Updated: 2022/06/30 00:53:53 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ t_map	*dyarr_to_arr(t_map *head_token)
 	return (head_token);
 }
 
-
 t_dyarr	*create_n_push_list(t_dyarr **arr_head, char *line)
 {
 	t_dyarr	*line_l;
@@ -67,23 +66,17 @@ int	pars_map(int argc, char **argv, t_map *map)
 {
 	int		map_fd;
 	char	*line;
-	// t_map	map;
-	// char	*tmp;
 
 	if (argc != 2)
 		return (throw_error("one argument excepted", 1, 'm'));
-
 	if (!is_cub_extention(argv[1]))
 		return (1);
-
 	map_fd = open(argv[1], O_RDONLY | O_NOFOLLOW);
 	if (map_fd < 0)
 		return (throw_error("open failed", 1, 'p'));
-
 	line = get_next_line(map_fd);
 	if (!line)
 		return (throw_error("gnl failed", 1, 'm'));
-
 	ft_memset(map, 0, sizeof map);
 	map->color_ceil = -2;
 	map->color_floor = -2;
@@ -108,25 +101,25 @@ int	pars_map(int argc, char **argv, t_map *map)
 		line = get_next_line(map_fd);
 	}
 	create_and_fill_arr(map);
-	// visualize_map(map);
-
 	if (close(map_fd))
 		return (throw_error("close failed", 1, 'p'));
 	return (0);
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-	t_map *map;
+	t_map	*map;
 
-	// void *init = mlx_init();
-	map = ft_calloc(1 ,sizeof(t_map));
-	if(!map)
+	map = ft_calloc(1, sizeof(t_map));
+	if (!map)
 		return (ft_ret_err("malloc error", 1));
 	if (argc != 2)
 		return (ft_ret_err("./cub3D map.cub", 1));
 	if (pars_map(argc, argv, map))
 		return (1);
-	visualize_map(map);
-	return 0;
+
+	game_init(map);
+
+	ft_lstclear_dyarr(&map->map_arr_l, free);
+	return (0);
 }
