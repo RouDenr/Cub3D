@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_map_validation.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:13:10 by vseel             #+#    #+#             */
-/*   Updated: 2022/06/25 22:30:24 by vseel            ###   ########.fr       */
+/*   Updated: 2022/06/30 00:03:39 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ char	get_texture_path(char **tmp, char **wall)
 {
 	if (*wall)
 	{
+		// printf("%s\n", *wall);
 		double_arr_free(tmp);
 		return (throw_error("invalid config line: dublicated instruction", 0, 'm'));
 	}
@@ -80,7 +81,7 @@ int	is_valid_color_str(char *str)
 	int	length;
 
 	length = ft_strlen(str);
-	if (length > 3 || length == 0) 
+	if (length > 3 || length == 0)
 		return (0);
 	while (--length != -1)
 		if ((str[length] < '0' || str[length] > '9') && str[length] != '\n') // KOSTYL
@@ -96,7 +97,7 @@ int	parse_color(char *str)
 	colors_str = ft_split(str, ',');
 	if (!colors_str)
 		return (throw_error("parse_color", -1, 'm'));
-	if (double_arr_size(colors_str) != 3 
+	if (double_arr_size(colors_str) != 3
 		|| !is_valid_color_str(colors_str[0])
 		|| !is_valid_color_str(colors_str[1])
 		|| !is_valid_color_str(colors_str[2]))

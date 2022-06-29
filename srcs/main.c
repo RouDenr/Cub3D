@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 21:19:09 by decordel          #+#    #+#             */
-/*   Updated: 2022/06/29 22:34:12 by decordel         ###   ########.fr       */
+/*   Updated: 2022/06/30 00:08:27 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ t_dyarr	*create_n_push_list(t_dyarr **arr_head, char *line)
 	return (*arr_head);
 }
 
-int	pars_map(int argc, char **argv, t_map *new_map)
+int	pars_map(int argc, char **argv, t_map *map)
 {
 	int		map_fd;
 	char	*line;
-	t_map	map;
+	// t_map	map;
 	// char	*tmp;
 
 	if (argc != 2)
@@ -84,12 +84,12 @@ int	pars_map(int argc, char **argv, t_map *new_map)
 	if (!line)
 		return (throw_error("gnl failed", 1, 'm'));
 
-	ft_memset(&map, 0, sizeof map);
-	map.color_ceil = -2;
-	map.color_floor = -2;
+	ft_memset(map, 0, sizeof map);
+	map->color_ceil = -2;
+	map->color_floor = -2;
 	while (!is_valid_map_line(line))
 	{
-		if (!parse_config_line(line, &map))
+		if (!parse_config_line(line, map))
 		{
 			free (line);
 			return (1);
@@ -103,16 +103,15 @@ int	pars_map(int argc, char **argv, t_map *new_map)
 			free(line);
 			return (throw_error("invalid map line", 1, 'p'));
 		}
-		if (!create_n_push_list(&map.map_arr_l, line))
+		if (!create_n_push_list(&map->map_arr_l, line))
 			return (4);
 		line = get_next_line(map_fd);
 	}
-	create_and_fill_arr(&map);
-	visualize_map(&map);
+	create_and_fill_arr(map);
+	// visualize_map(map);
 
 	if (close(map_fd))
 		return (throw_error("close failed", 1, 'p'));
-	new_map = &map;
 	return (0);
 }
 
@@ -121,10 +120,13 @@ int main(int argc, char *argv[])
 	t_map *map;
 
 	// void *init = mlx_init();
-	map = NULL;
+	map = ft_calloc(1 ,sizeof(t_map));
+	if(!map)
+		return (ft_ret_err("malloc error", 1));
 	if (argc != 2)
 		return (ft_ret_err("./cub3D map.cub", 1));
 	if (pars_map(argc, argv, map))
 		return (1);
+	visualize_map(map);
 	return 0;
 }

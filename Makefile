@@ -6,7 +6,7 @@
 #    By: decordel <decordel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 21:18:07 by decordel          #+#    #+#              #
-#    Updated: 2022/06/29 22:15:38 by decordel         ###   ########.fr        #
+#    Updated: 2022/06/30 00:10:41 by decordel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,14 +17,7 @@ D		=	deps
 
 NAME	=	cub3D
 
-SRCS	=	main.c \
-			# parser/parser.c					\
-			# parser/parser_debug_utils.c		\
-			# parser/parser_exit_utils.c			\
-			# parser/parser_map_validation.c		\
-			# parser/parser_file_utils.c			\
-			# parser/lstfuncs_dyarr_1.c			\
-			# parser/lstfuncs_dyarr_2.c
+SRCS	=	main.c
 
 # SRCS	+=	main_opt.c
 
@@ -85,6 +78,7 @@ $D/%.d		: $S%.c	| $D
 clean:
 	@echo "\n$(PREFIX) Cleaning libft "
 	@make clean -C $(LIB_DIR) -s
+	@make clean -C $(PARS_DIR) -s
 	@echo "$(PREFIX) Done! \n"
 	@echo "\n$(PREFIX) Cleaning *.o files "
 	@$(RM) $O
@@ -136,6 +130,35 @@ mlx:
 	@$(MAKE) -C $(MLX_DIR)
 	@echo "$(PREFIX) Done! \n"
 #-------------
+
+
+#! debug ---------------------------------
+MESS	= fix
+
+ARGS	= maps/map1.cub
+
+git		:
+	git add .
+	git commit -m "$(MESS)"
+	git push
+
+do		:
+	make all -s
+	./$(NAME) $(ARGS)
+
+leaks	:
+	make all
+	leaks -atExit -- ./$(NAME) $(ARGS)
+
+debug	:
+	make all
+	lldb -- ./$(NAME) $(ARGS)
+
+norm	:
+	clear
+	norminette | grep Er
+
+#! debug ---------------------------------
 
 ifeq ($(MAKECMDGOALS),fclean)
 else ifeq ($(MAKECMDGOALS),clean)
