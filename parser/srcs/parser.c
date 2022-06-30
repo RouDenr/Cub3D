@@ -6,7 +6,7 @@
 /*   By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:13:10 by vseel             #+#    #+#             */
-/*   Updated: 2022/06/25 20:51:20 by vseel            ###   ########.fr       */
+/*   Updated: 2022/06/30 22:37:03 by vseel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,43 +57,41 @@ t_dyarr	*create_n_push_list(t_dyarr **arr_head, char *line)
 	}
 	if (!ft_lstadd_back_dyarr(arr_head, line_l))
 	{
+		free (line);
 		throw_error("lstadd_back_dyarr", 5, 'm');
 		return (NULL);
 	}
 	return (*arr_head);
 }
 
-int	main(int argc, char **argv)
+int	parse_main(int argc, char **argv, t_map *map)
 {
 	int		map_fd;
 	char	*line;
-	t_map	map;
-	// char	*tmp;
 
-	if (argc != 2)
-		return (throw_error("one argument excepted", 1, 'm'));
+	// if (argc != 2)
+	// 	return (throw_error("one argument excepted", 0, 'm'));
+	(void) argc;
 
 	if (!is_cub_extention(argv[1]))
-		return (1);
+		return (0);
 
 	map_fd = open(argv[1], O_RDONLY | O_NOFOLLOW);
 	if (map_fd < 0)
-		return (throw_error("open failed", 1, 'p'));
+		return (throw_error("open failed", 0, 'p'));
 
 	line = get_next_line(map_fd);
 	if (!line)
-		return (throw_error("gnl failed", 1, 'm'));
+		return (throw_error("gnl failed", 0, 'm'));
 
-	ft_memset(&map, 0, sizeof map);
-	map.color_ceil = -2;
-	map.color_floor = -2;
 	while (!is_valid_map_line(line))
 	{
-		if (!parse_config_line(line, &map))
+		if (!parse_config_line(line, map))
 		{
 			free (line);
-			return (1);
+			return (0);
 		}
+		free (line);
 		line = get_next_line(map_fd);
 	}
 	while (line)
@@ -101,18 +99,19 @@ int	main(int argc, char **argv)
 		if (!is_valid_map_line(line))
 		{
 			free(line);
-			return (throw_error("invalid map line", 1, 'p'));
+			return (throw_error("invalid map line", 0, 'p'));
 		}
-		if (!create_n_push_list(&map.map_arr_l, line))
-			return (4);
+		if (!create_n_push_list(&map->map_arr_l, line))
+			return (0);
+		// free (line);
 		line = get_next_line(map_fd);
 	}
-	create_and_fill_arr(&map);
-	visualize_map(&map);
+	create_and_fill_arr(map);
+	visualize_map(map);
 
 	if (close(map_fd))
-		return (throw_error("close failed", 1, 'p'));
-	return (0);
+		return (throw_error("close failed", 0, 'p'));
+	return (1);
 }
 
 /*
@@ -143,58 +142,3 @@ int	main(int argc, char **argv)
 		6) Each element (except the map) firsts information is the type identifier (composed by one or two character(s)), followed by all specific informations for each object in a strict order
 		7) If any misconfiguration of any kind is encountered in the file, the program must exit properly and return "Error\n" followed by an explicit error message of your choice.
 */
-
-// if (!ft_memcmp("NO", line, 2))
-		// {
-		// 	tmp = ft_substr(line, 3, ft_strlen(line + 3));
-		// 	if (!tmp)
-		// 		return (throw_error("substr_no", 11, 'm'));
-		// 	map.wall_no = tmp;	
-		// }
-		// else if (!ft_memcmp("SO", line, 2))
-		// {
-		// 	tmp = ft_substr(line, 3, ft_strlen(line + 3));
-		// 	if (!tmp)
-		// 		return (throw_error("substr_so", 12, 'm'));
-		// 	map.wall_so = tmp;	
-		// }
-		// else if (!ft_memcmp("WE", line, 2))
-		// {
-		// 	tmp = ft_substr(line, 3, ft_strlen(line + 3));
-		// 	if (!tmp)
-		// 		return (throw_error("substr_we", 13, 'm'));
-		// 	map.wall_we = tmp;	
-		// }
-		// else if (!ft_memcmp("EA", line, 2))
-		// {
-		// 	tmp = ft_substr(line, 3, ft_strlen(line + 3));
-		// 	if (!tmp)
-		// 		return (throw_error("substr_ea", 14, 'm'));
-		// 	map.wall_ea = tmp;	
-		// }
-		// else if (!ft_memcmp("F", line, 1))
-		// {
-		// 	tmp = ft_substr(line, 2, ft_strlen(line + 2));
-		// 	if (!tmp)
-		// 		return (throw_error("substr_f", 15, 'm'));	
-		// 	map.color_floor = parse_color(tmp);
-		// 	if (map.color_floor == -1)
-		// 		return (throw_error("Colors allowed from 0 to 255 inc", 16, 'm'));
-		// 	free(tmp);
-		// }
-		// else if (!ft_memcmp("C", line, 1))
-		// {
-		// 	tmp = ft_substr(line, 2, ft_strlen(line + 2));
-		// 	if (!tmp)
-		// 		return (throw_error("substr_c", 17, 'm'));
-		// 	map.color_ceil = parse_color(tmp);
-		// 	if (map.color_ceil == -1)
-		// 		return (throw_error("Colors allowed from 0 to 255 inc", 18, 'm'));
-		// 	free(tmp);
-		// }
-		// else if (!ft_memcmp("\n", line, 1))
-		// {
-		// 	free(line);
-		// 	line = get_next_line(map_fd);
-		// 	continue ;
-		// }

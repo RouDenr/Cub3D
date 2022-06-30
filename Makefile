@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: decordel <decordel@student.42.fr>          +#+  +:+       +#+         #
+#    By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 21:18:07 by decordel          #+#    #+#              #
-#    Updated: 2022/06/30 05:33:07 by decordel         ###   ########.fr        #
+#    Updated: 2022/06/30 23:04:20 by vseel            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,6 @@ SRCS	=	main.c		\
 			raycast.c	\
 			game.c
 
-# SRCS	+=	main_opt.c
 
 CC		=	clang
 
@@ -36,16 +35,20 @@ SRCS	:=	$(foreach file,$(SRCS),$S$(file))
 OBJS	=	$(SRCS:$S%.c=$O/%.o)
 DEPS	=	$(SRCS:$S%.c=$D/%.d)
 
-MLX_DIR		:=	minilibx
-MLX_AR		:=	$(MLX_DIR)/libmlx.a
-MLX_FLAGS	:= -L${MLX_DIR} -lmlx -framework OpenGL -framework AppKit
+LDFLAGS	:= -framework OpenGL -framework AppKit
 
-PARS_DIR	:=	parser
-PARS_AR		:=	$(PARS_DIR)/parser.a
+MLX_DIR	:=	minilibx
+# MLX_DIR	:=	minilibx_swift
+# MLX_DIR	:=	minilibx_sources
+MLX_AR	:=	$(MLX_DIR)/libmlx.a
+# MLX_FLAGS	:= -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+
+PARS_DIR:=	parser
+PARS_AR	:=	$(PARS_DIR)/parser.a
 
 LIB_DIR	:=	libft
 LIB_AR	:=	$(LIB_DIR)/libft.a
-LIB_FLAGS := -L${LIB_DIR} -lft
+# LIB_FLAGS	:= -L$(LIB_DIR) -lft
 
 AR		=	ar rcs
 
@@ -57,9 +60,9 @@ PREFIX	:=	$(MAKELEVEL)>>
 
 all			: $(DEPS) $(NAME)
 
-$(NAME)	: $(OBJS) ${LIB_AR} ${MLX_AR} ${PARS_AR}
+$(NAME)		: $(LIB_AR) $(OBJS) $(MLX_AR) $(PARS_AR)
 	@echo "\n$(PREFIX) Building binary "
-	@$(CC) $(CFLAGS) ${LIB_FLAGS} ${MLX_FLAGS} $^ -o $@
+	@$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
 	@echo "$(PREFIX) Done! \n"
 #-------------
 
@@ -81,40 +84,44 @@ $D/%.d		: $S%.c	| $D
 
 # Standart rules for cleanup
 clean:
-	@echo "\n$(PREFIX) Cleaning libft "
+	@echo "\n$(PREFIX) Cleaning cub3d libs "
 	@make clean -C $(LIB_DIR) -s
 	@make clean -C $(PARS_DIR) -s
+	@make clean -C $(MLX_DIR) -s
 	@echo "$(PREFIX) Done! \n"
-	@echo "\n$(PREFIX) Cleaning *.o files "
+	@echo "\n$(PREFIX) Cleaning cub3d *.o files "
 	@$(RM) $O
 	@echo "$(PREFIX) Done! \n"
 
 fclean		: clean
-	@echo "\n$(PREFIX) Cleaning binary and archive "
-	@$(RM) $(NAME) $(NAME_BIN)
+	@echo "\n$(PREFIX) Cleaning cub3d binary "
+	@$(RM) $(NAME)
 	@echo "$(PREFIX) Done! \n"
-	@echo "\n$(PREFIX) Cleaning *.d files "
+	@echo "\n$(PREFIX) Cleaning cub3d *.d files "
 	@$(RM) $D
 	@echo "$(PREFIX) Done! \n"
+	@make fclean -C $(LIB_DIR) -s
+	@make fclean -C $(PARS_DIR) -s
+	@make clean -C $(MLX_DIR) -s
 
 re			: fclean all
 #-------------
 
-# Building parser archive for minishell binary
-binary		: $(NAME_BIN) $(DEPS)
+# # Building parser archive for minishell binary
+# binary		: $(NAME_BIN) $(DEPS)
 
-$(NAME_BIN)	: $(OBJS)
-	@echo "\n$(PREFIX) Building parser binary "
-	@$(CC) $(CFLAGS) -Llibft -lft $^ -o $@
-	@echo "$(PREFIX) Done! \n"
-#-------------
+# $(NAME_BIN)	: $(OBJS)
+# 	@echo "\n$(PREFIX) Building parser binary "
+# 	@$(CC) $(CFLAGS) -Llibft -lft $^ -o $@
+# 	@echo "$(PREFIX) Done! \n"
+# #-------------
 
 # Building libft
 $(LIB_AR)	: libft ;
 
 libft:
 	@echo "\n$(PREFIX) Invoking libft makefile"
-	@$(MAKE) -C $(LIB_DIR)
+	@$(MAKE) -C $(LIB_DIR) -j 4
 	@echo "$(PREFIX) Done! \n"
 #-------------
 
@@ -123,7 +130,7 @@ $(PARS_AR)	: parser ;
 
 parser	:
 	@echo "\n$(PREFIX) Invoking parser makefile"
-	@$(MAKE) -C $(PARS_DIR)
+	@$(MAKE) -C $(PARS_DIR) -j 4
 	@echo "$(PREFIX) Done! \n"
 #-------------
 
@@ -132,12 +139,16 @@ $(MLX_AR)	: mlx ;
 
 mlx:
 	@echo "\n$(PREFIX) Invoking mlx makefile"
+	# @$(MAKE) -C $(MLX_DIR) -j 4
 	@$(MAKE) -C $(MLX_DIR)
 	@echo "$(PREFIX) Done! \n"
 #-------------
 
 
 #! debug ---------------------------------
+
+.PHONY	: git do leaks debug norm
+
 MESS	= fix
 
 ARGS	= maps/map1.cub
