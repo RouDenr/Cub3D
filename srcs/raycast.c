@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 20:07:56 by decordel          #+#    #+#             */
-/*   Updated: 2022/06/30 05:33:29 by decordel         ###   ########.fr       */
+/*   Updated: 2022/06/30 05:59:13 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,8 @@ void	raycasting(t_mlx *mlx)
 		ray.map_y = (int) mlx->player.y;
 		set_delta_dist_ray(&ray);
 		set_side_dist_ray(&ray, player);
+		hit_ray(&ray, mlx);
+		draw_ray(&ray, mlx);
 		ray.x++;
 	}
 }
