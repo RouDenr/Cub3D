@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:48:26 by decordel          #+#    #+#             */
-/*   Updated: 2022/06/30 05:33:14 by decordel         ###   ########.fr       */
+/*   Updated: 2022/06/30 22:00:50 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,6 @@ t_player	player_init(char **map);
 void		raycasting(t_mlx *mlx);
 void		ft_pixel_put(t_img *img, int x, int y, int color);
 void		draw_ver_line(t_img *screen, int x, int y[], int color);
+void		draw_background(t_mlx *mlx);
 
 #endif

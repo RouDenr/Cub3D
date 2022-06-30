@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 20:07:56 by decordel          #+#    #+#             */
-/*   Updated: 2022/06/30 05:31:02 by decordel         ###   ########.fr       */
+/*   Updated: 2022/06/30 22:02:52 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,27 @@ void	ft_pixel_put(t_img *img, int x, int y, int color)
 
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	*(unsigned int *) dst = color;
+}
+
+void	draw_background(t_mlx *mlx)
+{
+	int	i = 0;
+	int	j;
+	int	color;
+
+	color = mlx->map->color_ceil;
+	while (i < FT_WIN_H)
+	{
+		j = 0;
+		if (i == FT_WIN_H / 2)
+			color = mlx->map->color_floor;
+		while (j < FT_WIN_W)
+		{
+			ft_pixel_put(&mlx->screen, j, i, color);
+			j++;
+		}
+		i++;
+	}
 }
 
 void	draw_ver_line(t_img *screen, int x, int y[], int color)
