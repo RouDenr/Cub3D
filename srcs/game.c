@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 01:01:45 by decordel          #+#    #+#             */
-/*   Updated: 2022/06/30 22:10:55 by decordel         ###   ########.fr       */
+/*   Updated: 2022/06/30 22:46:56 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	do_next_frame(t_mlx *mlx)
 {
 	draw_background(mlx);
-	// raycasting(mlx);
+	raycasting(mlx);
 	mlx_put_image_to_window(mlx->init, mlx->win, mlx->screen.img, 0, 0);
 	return (mlx->player.dir_x);
 }

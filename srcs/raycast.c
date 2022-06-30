@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 20:07:56 by decordel          #+#    #+#             */
-/*   Updated: 2022/06/30 05:59:13 by decordel         ###   ########.fr       */
+/*   Updated: 2022/06/30 23:02:30 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	set_delta_dist_ray(t_ray *ray)
 {
 	if (ray->ray_x == 0)
-		ray->delta_dist_x = 1.f;
+		ray->delta_dist_x = 1e30;
 	else
 		ray->delta_dist_x = fabs(1 / ray->ray_x);
 	if (ray->ray_y == 0)
-		ray->delta_dist_y = 1.f;
+		ray->delta_dist_y = 1e30;
 	else
 		ray->delta_dist_y = fabs(1 / ray->ray_y);
 }
@@ -95,7 +95,7 @@ void	draw_ray(t_ray *ray, t_mlx *mlx)
 	y[1] = height_dr / 2 + mlx->screen.h / 2;
 	if (y[1] >= mlx->screen.h)
 		y[1] = mlx->screen.h - 1;
-	draw_ver_line(&mlx->screen, ray->x, y, 0x00FF0000);
+	draw_ver_line(mlx, ray->x, y, 0x00FF0000);
 }
 
 void	raycasting(t_mlx *mlx)
@@ -108,7 +108,7 @@ void	raycasting(t_mlx *mlx)
 	player = mlx->player;
 	while (ray.x < mlx->screen.w)
 	{
-		cam_x = 2 * ray.x / (float)mlx->screen.w - 1.f;
+		cam_x = 2 * ray.x / (float)mlx->screen.w - 1;
 		ray.ray_x = mlx->player.dir_x + mlx->player.plane_x * cam_x;
 		ray.ray_y = mlx->player.dir_y + mlx->player.plane_y * cam_x;
 		ray.map_x = (int) mlx->player.x;
