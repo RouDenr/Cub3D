@@ -6,9 +6,16 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 04:37:06 by decordel          #+#    #+#             */
-/*   Updated: 2022/06/30 04:39:01 by decordel         ###   ########.fr       */
+/*   Updated: 2022/06/30 23:07:31 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../incs/cub3D.h"
+
+void	print_log(t_ray *ray)
+{
+	// printf("", ray.)
+}
 
 // void	log_in_file(char *)
 // {
