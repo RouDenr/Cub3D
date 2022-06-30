@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 21:19:09 by decordel          #+#    #+#             */
-/*   Updated: 2022/06/30 00:53:53 by decordel         ###   ########.fr       */
+/*   Updated: 2022/06/30 01:27:31 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ int	main(int argc, char *argv[])
 		return (1);
 
 	game_init(map);
-
 	ft_lstclear_dyarr(&map->map_arr_l, free);
 	return (0);
 }

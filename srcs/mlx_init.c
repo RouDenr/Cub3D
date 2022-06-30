@@ -6,35 +6,11 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 00:25:18 by decordel          #+#    #+#             */
-/*   Updated: 2022/06/30 00:54:41 by decordel         ###   ########.fr       */
+/*   Updated: 2022/06/30 02:57:32 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/cub3D.h"
-
-int	do_next_frame(t_mlx *mlx)
-{
-	// int i = 0;
-	// int j;
-
-	// while (i < 500)
-	// {
-	// 	j = 0;
-	// 	while (j < 500)
-	// 	{
-	// 		ft_pixel_put(&mlx->screen, j, i, 0x00FF0000);
-	// 		j++;
-	// 	}
-	// 	i++;
-	// }
-	// ft_img_put_screen(&mlx->screen, &mlx->wall, 0, 0);
-
-	// mlx_put_image_to_window(mlx->init, mlx->win, mlx->screen.img, 0, 0);
-
-	// mlx_destroy_image(mlx->init, mlx->screen.img);
-
-	return (mlx->player.dir_x);
-}
 
 int	exit_hook(void)
 {
@@ -80,11 +56,14 @@ t_mlx	game_init(t_map *map)
 	mlx.sources.wall_no = init_wall(mlx, map->wall_no);
 	mlx.sources.wall_so = init_wall(mlx, map->wall_so);
 	mlx.sources.wall_we = init_wall(mlx, map->wall_we);
-	mlx.sources.screen.img = mlx_new_image(mlx.init, FT_WIN_W, FT_WIN_H);
-	mlx.sources.screen.addr = mlx_get_data_addr(mlx.sources.screen.img,
-			&mlx.sources.screen.bits_per_pixel,
-			&mlx.sources.screen.line_length,
-			&mlx.sources.screen.endian);
+	mlx.screen.img = mlx_new_image(mlx.init, FT_WIN_W, FT_WIN_H);
+	mlx.screen.addr = mlx_get_data_addr(mlx.screen.img,
+			&mlx.screen.bits_per_pixel,
+			&mlx.screen.line_length,
+			&mlx.screen.endian);
+	mlx.screen.h = FT_WIN_H;
+	mlx.screen.w = FT_WIN_W;
+	mlx.player = player_init(map->map_arr);
 	mlx_hook(mlx.win, 17, 0L, exit_hook, &mlx);
 	mlx_hook(mlx.win, 2, 1L << 0, key_hook, &mlx);
 	mlx_loop_hook(mlx.init, do_next_frame, &mlx);

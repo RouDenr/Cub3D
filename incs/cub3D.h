@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:48:26 by decordel          #+#    #+#             */
-/*   Updated: 2022/06/30 00:53:35 by decordel         ###   ########.fr       */
+/*   Updated: 2022/06/30 05:33:14 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,34 @@ typedef struct s_img
 
 typedef struct s_player
 {
-	double	x;
-	double	y;
-	double	dir_x;
-	double	dir_y;
-	double	plane_x;
-	double	plane_y;
-
+	float	x;
+	float	y;
+	float	dir_x;
+	float	dir_y;
+	float	plane_x;
+	float	plane_y;
 	char	start_dir;
 }			t_player;
 
+typedef struct s_ray
+{
+	int			x;
+	int			map_x;
+	int			map_y;
+	float		ray_x;
+	float		ray_y;
+	int			step_x;
+	int			step_y;
+	int			side;
+	float		side_dist_x;
+	float		side_dist_y;
+	float		delta_dist_x;
+	float		delta_dist_y;
+
+}			t_ray;
+
 typedef struct s_sources
 {
-	t_img	screen;
 	t_img	wall_no;
 	t_img	wall_so;
 	t_img	wall_we;
@@ -75,12 +90,11 @@ typedef struct s_mlx
 	t_sources	sources;
 }				t_mlx;
 
-t_mlx	game_init(t_map *map);
-
-// int		check_invalid_items(char *map);
-// void	find_pl(t_player *player, char **data);
-// int		check_wall(char **map);
-// void	ft_pixel_put(t_img *img, int x, int y, int color);
-// void	ft_img_put_screen(t_img *screen, t_img *img, int x, int y);
+t_mlx		game_init(t_map *map);
+int			do_next_frame(t_mlx *mlx);
+t_player	player_init(char **map);
+void		raycasting(t_mlx *mlx);
+void		ft_pixel_put(t_img *img, int x, int y, int color);
+void		draw_ver_line(t_img *screen, int x, int y[], int color);
 
 #endif
