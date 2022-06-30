@@ -6,7 +6,7 @@
 #    By: decordel <decordel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 21:18:07 by decordel          #+#    #+#              #
-#    Updated: 2022/06/30 05:33:07 by decordel         ###   ########.fr        #
+#    Updated: 2022/06/30 06:00:45 by decordel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -138,14 +138,13 @@ mlx:
 
 
 #! debug ---------------------------------
-MESS	= fix
+MESS	= 
 
 ARGS	= maps/map1.cub
 
 git		:
 	git add .
 	git commit -m "$(MESS)"
-	git push
 
 do		:
 	make all -s
