@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 00:52:05 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/01 04:03:54 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/01 04:07:48 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ void	player_move(t_map *map, t_player *player, int step)
 	int		y;
 	char	cell;
 
-	x = (int) (player->x + player->dir_x * FT_STEP_SPEED * step);
-	y = (int) (player->y + player->dir_y * FT_STEP_SPEED * step);
+	x = (int)(player->x + player->dir_x * FT_STEP_SPEED * step);
+	y = (int)(player->y + player->dir_y * FT_STEP_SPEED * step);
 	cell = map->map_arr[(int) player->y][x];
 	printf("%d %d %c\n", x, y, cell);
 	if (map->map_arr[(int) player->y][x] == 0)
 		player->x += player->dir_x * FT_STEP_SPEED * step;
-	x = (int) (player->x + player->dir_x * FT_STEP_SPEED * step);
+	x = (int)(player->x + player->dir_x * FT_STEP_SPEED * step);
 	cell = map->map_arr[y][(int) player->x];
 	printf("%d %d %c\n\n", x, y, cell);
 	if (map->map_arr[y][(int) player->x] == 0)
