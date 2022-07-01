@@ -6,7 +6,7 @@
 #    By: decordel <decordel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 21:18:07 by decordel          #+#    #+#              #
-#    Updated: 2022/06/30 23:29:30 by decordel         ###   ########.fr        #
+#    Updated: 2022/07/01 03:13:33 by decordel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,11 +17,13 @@ D		=	deps
 
 NAME	=	cub3D
 
-SRCS	=	main.c		\
-			mlx_init.c	\
-			player.c	\
-			draw.c		\
-			raycast.c	\
+SRCS	=	main.c				\
+			mlx_init.c			\
+			player.c			\
+			player_controller.c	\
+			draw.c				\
+			raycast.c			\
+			logs.c				\
 			game.c
 
 

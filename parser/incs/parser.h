@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:13:05 by vseel             #+#    #+#             */
-/*   Updated: 2022/06/30 22:17:37 by vseel            ###   ########.fr       */
+/*   Updated: 2022/07/01 00:46:58 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <stdlib.h>
-# include <unistd.h> 
+# include <unistd.h>
 # include <limits.h>
 
 # define VISUALIZE_MAP	1
@@ -33,7 +33,7 @@ typedef struct s_dyarr {
  * @param wall_so path to south texture file
  * @param wall_we path to west texture file
  * @param wall_ea path to east texture file
- * @param map_arr_l tmp map dynamic list 
+ * @param map_arr_l tmp map dynamic list
  * @param map_arr 2-axes map array
  */
 typedef struct s_map {
@@ -60,7 +60,7 @@ int		throw_error(char *msg, int exit_code, char mode);
 /* parser_debug_utils */
 void	showbits(unsigned int x);
 void	visualize_dyarr(t_dyarr *arr);
-void	visualize_map(t_map *map);
+void	visualize_map(t_map map);
 
 /* parser_map_validation */
 int		double_arr_size(char **strs);

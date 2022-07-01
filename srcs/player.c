@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 01:02:34 by decordel          #+#    #+#             */
-/*   Updated: 2022/06/30 23:36:05 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/01 03:03:46 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,31 @@ void	init_player_dir(t_player *player, char dir)
 {
 	if (dir == 'E')
 	{
-		player->dir_x = -1;
+		player->dir_x = 1;
 		player->dir_y = 0;
+		player->plane_x = 0;
+		player->plane_y = -0.66;
 	}
 	if (dir == 'N')
 	{
 		player->dir_x = 0;
 		player->dir_y = -1;
+		player->plane_x = -0.66;
+		player->plane_y = 0;
 	}
 	if (dir == 'S')
 	{
 		player->dir_x = 0;
 		player->dir_y = 1;
+		player->plane_x = 0.66;
+		player->plane_y = 0;
 	}
 	if (dir == 'W')
 	{
-		player->dir_x = 1;
+		player->dir_x = -1;
 		player->dir_y = 0;
+		player->plane_x = 0;
+		player->plane_y = 0.66;
 	}
 }
 
@@ -57,7 +65,7 @@ void	find_pl(t_player *player, char **map)
 				player->x = j;
 				player->y = i;
 				init_player_dir(player, map[i][j]);
-				printf("%d %d\n", j, i);
+				printf("pl %f %f\n", player->x, player->y);
 				return ;
 			}
 			j++;
@@ -71,7 +79,5 @@ t_player	player_init(char **map)
 	t_player	player;
 
 	find_pl(&player, map);
-	player.plane_x = 0;
-	player.plane_y = 0.66;
 	return (player);
 }

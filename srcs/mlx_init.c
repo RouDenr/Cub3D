@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 00:25:18 by decordel          #+#    #+#             */
-/*   Updated: 2022/06/30 22:13:47 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/01 02:31:14 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,14 @@ int	key_hook(int keycode, t_mlx *mlx)
 		mlx_destroy_window(mlx->init, mlx->win);
 		exit(0);
 	}
+	if (keycode == 49)
+		visualize_map(*mlx->map);
+	if (keycode == 13 || keycode == 0 || keycode == 1 || keycode == 2)
+		player_control(&mlx->map, &mlx->player, keycode);
+	if (keycode == 126 || keycode == 123 || keycode == 125 || keycode == 124)
+		player_control(&mlx->map, &mlx->player, keycode);
 	return (0);
 }
-	// if (keycode == 13 || keycode == 0 || keycode == 1 || keycode == 2)
-	// 	pl_move(mlx, &mlx->map, mlx->map.data, keycode);
-	// if (keycode == 126 || keycode == 123 || keycode == 125 || keycode == 124)
-	// 	pl_move(mlx, &mlx->map, mlx->map.data, keycode);
 
 t_img	init_wall(t_mlx mlx, char *source)
 {

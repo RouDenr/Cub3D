@@ -6,15 +6,20 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 04:37:06 by decordel          #+#    #+#             */
-/*   Updated: 2022/06/30 23:07:31 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/01 03:12:56 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/cub3D.h"
 
-void	print_log(t_ray *ray)
+int	print_log_ray(int keycode, t_ray *ray)
 {
-	// printf("", ray.)
+	if (keycode != 49)
+		return (0);
+	system("clean");
+	printf("ray ---\n");
+	printf("x - %d y - %d\n");
+	return (0);
 }
 
 // void	log_in_file(char *)

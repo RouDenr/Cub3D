@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:13:10 by vseel             #+#    #+#             */
-/*   Updated: 2022/06/30 23:37:11 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/01 00:41:50 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	parse_main(int argc, char **argv, t_map *map)
 		line = get_next_line(map_fd);
 	}
 	create_and_fill_arr(map);
-	visualize_map(map);
+	// visualize_map(map);
 
 	if (close(map_fd))
 		return (throw_error("close failed", 0, 'p'));

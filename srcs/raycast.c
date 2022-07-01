@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 20:07:56 by decordel          #+#    #+#             */
-/*   Updated: 2022/06/30 23:39:58 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/01 03:15:20 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ void	draw_ray(t_ray *ray, t_mlx *mlx)
 	else
 		w_dist = (ray->side_dist_y - ray->delta_dist_y);
 	height_dr = (int)(mlx->screen.h / w_dist);
-	system("clean");
-	printf("%f %d \n", ray->side_dist_x, height_dr);
-	visualize_map(mlx->map);
+	// system("clean");
+	// printf("%f %d \n", ray->side_dist_x, height_dr);
+	// visualize_map(*mlx->map);
 	y[0] = -height_dr / 2 + mlx->screen.h / 2;
 	if (y[0] < 0)
 		y[0] = 0;
@@ -106,6 +106,7 @@ void	raycasting(t_mlx *mlx)
 
 	ray.x = 0;
 	player = mlx->player;
+	// mlx_hook(mlx->win, 2, 1L << 0, print_log_ray, mlx);
 	while (ray.x < mlx->screen.w)
 	{
 		cam_x = 2 * ray.x / (float)mlx->screen.w - 1;
@@ -113,7 +114,7 @@ void	raycasting(t_mlx *mlx)
 		ray.map_x = (int) mlx->player.x;
 		ray.ray_y = mlx->player.dir_y + mlx->player.plane_y * cam_x;
 		ray.map_y = (int) mlx->player.y;
-		printf("%f %d %d\n", cam_x, ray.map_x, ray.map_y);
+		// printf(" beg %f %f %f\n", cam_x, mlx->player.x, mlx->player.y);
 		set_delta_dist_ray(&ray);
 		set_side_dist_ray(&ray, player);
 		hit_ray(&ray, mlx);
