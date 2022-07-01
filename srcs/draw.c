@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 20:07:56 by decordel          #+#    #+#             */
-/*   Updated: 2022/06/30 23:03:10 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/01 03:20:59 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,4 @@ void	draw_ver_line(t_mlx *mlx, int x, int y[], int color)
 		ft_pixel_put(&mlx->screen, x, i, color);
 		i++;
 	}
-	// mlx_put_image_to_window(mlx->init, mlx->win, mlx->screen.img, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 01:02:34 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/01 03:03:46 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/01 03:32:08 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,19 @@ char	is_pl(char ch)
 {
 	return (ch == 'E' || ch == 'N' || ch == 'S' || ch == 'W');
 }
+
+// void	init_player_dir(t_player *player, float d_x, float d_y)
+// {
+
+// }
+
+// void	init_player_dir(t_player *player, float d_x, float d_y)
+// {
+// 	player->dir_x = 1;
+// 	player->dir_y = 0;
+// 	player->plane_x = 0;
+// 	player->plane_y = -0.66;
+// }
 
 void	init_player_dir(t_player *player, char dir)
 {
