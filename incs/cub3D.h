@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:48:26 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/01 03:12:07 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/03 20:39:19 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,21 @@ typedef struct s_img
 	int		endian;
 }			t_img;
 
-typedef struct s_player
+typedef	struct s_player_dir
 {
 	float	x;
 	float	y;
-	float	dir_x;
-	float	dir_y;
-	double	plane_x;
-	double	plane_y;
-	char	start_dir;
+	float	plane_x;
+	float	plane_y;
+} t_player_dir;
+
+
+typedef struct s_player
+{
+	float			x;
+	float			y;
+	t_player_dir	dir;
+	char			start_dir;
 }			t_player;
 
 typedef struct s_ray

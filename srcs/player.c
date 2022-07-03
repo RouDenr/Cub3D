@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 01:02:34 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/01 03:32:08 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/03 20:56:40 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,49 +17,27 @@ char	is_pl(char ch)
 	return (ch == 'E' || ch == 'N' || ch == 'S' || ch == 'W');
 }
 
-// void	init_player_dir(t_player *player, float d_x, float d_y)
-// {
+t_player_dir	player_dir(float x, float y, float plane_x, float plane_y)
+{
+	t_player_dir	dir;
 
-// }
-
-// void	init_player_dir(t_player *player, float d_x, float d_y)
-// {
-// 	player->dir_x = 1;
-// 	player->dir_y = 0;
-// 	player->plane_x = 0;
-// 	player->plane_y = -0.66;
-// }
+	dir.x = x;
+	dir.y = y;
+	dir.plane_x = plane_x;
+	dir.plane_y = plane_y;
+	return (dir);
+}
 
 void	init_player_dir(t_player *player, char dir)
 {
 	if (dir == 'E')
-	{
-		player->dir_x = 1;
-		player->dir_y = 0;
-		player->plane_x = 0;
-		player->plane_y = -0.66;
-	}
+		player->dir = player_dir(1.f, 0.f, 0.f, -0.66f);
 	if (dir == 'N')
-	{
-		player->dir_x = 0;
-		player->dir_y = -1;
-		player->plane_x = -0.66;
-		player->plane_y = 0;
-	}
+		player->dir = player_dir(0.f, -1.f, -0.66f, 0.f);
 	if (dir == 'S')
-	{
-		player->dir_x = 0;
-		player->dir_y = 1;
-		player->plane_x = 0.66;
-		player->plane_y = 0;
-	}
+		player->dir = player_dir(0.f, 1.f, 0.66f, 0.f);
 	if (dir == 'W')
-	{
-		player->dir_x = -1;
-		player->dir_y = 0;
-		player->plane_x = 0;
-		player->plane_y = 0.66;
-	}
+		player->dir = player_dir(-1.f, 0.f, 0.f, 0.66f);
 }
 
 void	find_pl(t_player *player, char **map)
