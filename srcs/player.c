@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 01:02:34 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/03 21:35:00 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/03 21:59:23 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,10 @@ t_player	player_init(char **map)
 {
 	t_player	player;
 
+	player.x = -1;
+	player.y = -1;
 	find_pl(&player, map);
+	if (player.x == -1 || player.y == -1)
+		ft_put_err("cub3D: no player");
 	return (player);
 }

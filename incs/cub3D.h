@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:48:26 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/03 20:39:19 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/03 21:57:33 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ typedef struct s_player
 	float			x;
 	float			y;
 	t_player_dir	dir;
-	char			start_dir;
 }			t_player;
 
 typedef struct s_ray

@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 20:07:56 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/03 21:30:48 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/03 21:47:47 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 void	set_delta_dist_ray(t_ray *ray)
 {
 	if (ray->ray_x == 0)
-		ray->delta_dist_x = 1.f;
+		ray->delta_dist_x = 1.000015f;
+		// ray->delta_dist_x = .7f;
 	else
 		ray->delta_dist_x = fabs(1 / ray->ray_x);
 	if (ray->ray_y == 0)
-		ray->delta_dist_y = 1.f;
+		ray->delta_dist_y = 1.000015f;
+		// ray->delta_dist_y = .7f;
 	else
 		ray->delta_dist_y = fabs(1 / ray->ray_y);
 }
@@ -92,7 +94,7 @@ void	draw_ray(t_ray *ray, t_mlx *mlx)
 	y[1] = height_dr / 2 + mlx->screen.h / 2;
 	if (y[1] >= mlx->screen.h)
 		y[1] = mlx->screen.h - 1;
-	draw_ver_line(mlx, ray->x, y, 0x00FF0000);
+	draw_ver_line(mlx, ray->x, y, 0x76BA99);
 }
 
 void	raycasting(t_mlx *mlx)

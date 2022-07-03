@@ -62,7 +62,7 @@ PREFIX	:=	$(MAKELEVEL)>>
 
 all			: $(DEPS) $(NAME)
 
-$(NAME)		: $(LIB_AR) $(OBJS) $(MLX_AR) $(PARS_AR)
+$(NAME)		: $(LIB_AR) $(MLX_AR) $(PARS_AR) $(OBJS)
 	@echo "\n$(PREFIX) Building binary "
 	@$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
 	@echo "$(PREFIX) Done! \n"
