@@ -6,7 +6,7 @@
 #    By: decordel <decordel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 21:18:07 by decordel          #+#    #+#              #
-#    Updated: 2022/07/01 03:13:33 by decordel         ###   ########.fr        #
+#    Updated: 2022/07/03 21:19:49 by decordel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ RM		=	rm -rf
 
 PREFIX	:=	$(MAKELEVEL)>>
 
-.PHONY: all clean fclean re pack binary libft parser
+.PHONY: all clean fclean re pack binary libft parser do debug leaks norm git
 
 all			: $(DEPS) $(NAME)
 
@@ -150,7 +150,7 @@ mlx:
 #! debug ---------------------------------
 MESS	=
 
-ARGS	= maps/map1.cub
+ARGS	= maps/test.cub
 
 git		:
 	git add .

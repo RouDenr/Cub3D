@@ -6,13 +6,13 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 00:52:05 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/03 20:57:17 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/03 21:31:06 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/cub3D.h"
 #ifndef FT_ROTATE_SPEED
-# define FT_ROTATE_SPEED .1f
+# define FT_ROTATE_SPEED .2f
 #endif
 #ifndef FT_STEP_SPEED
 # define FT_STEP_SPEED .1f
@@ -35,7 +35,7 @@ void	player_move(t_map *map, t_player *player, int step)
 	cell = map->map_arr[y][(int) player->x];
 	if (cell == '0')
 	{
-		printf("%d %d %c\n\n", x, y, cell);
+		printf("%d %d %c\n", x, y, cell);
 		player->y += player->dir.y * FT_STEP_SPEED * step;
 	}
 }

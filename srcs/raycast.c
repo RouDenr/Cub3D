@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 20:07:56 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/03 20:56:10 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/03 21:30:48 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	set_delta_dist_ray(t_ray *ray)
 {
 	if (ray->ray_x == 0)
-		ray->delta_dist_x = 1e30;
+		ray->delta_dist_x = 1.f;
 	else
 		ray->delta_dist_x = fabs(1 / ray->ray_x);
 	if (ray->ray_y == 0)
-		ray->delta_dist_y = 1e30;
+		ray->delta_dist_y = 1.f;
 	else
 		ray->delta_dist_y = fabs(1 / ray->ray_y);
 }
@@ -69,7 +69,7 @@ void	hit_ray(t_ray *ray, t_mlx *mlx)
 		}
 		if (mlx->map->map_arr[ray->map_y][ray->map_x] != '0')
 		{
-			mlx->map->map_arr[ray->map_y][ray->map_x] = '*';
+			// mlx->map->map_arr[ray->map_y][ray->map_x] = '*';
 			hit = 1;
 		}
 	}
@@ -110,6 +110,7 @@ void	raycasting(t_mlx *mlx)
 		ray.map_x = (int) mlx->player.x;
 		ray.ray_y = mlx->player.dir.y + mlx->player.dir.plane_y * cam_x;
 		ray.map_y = (int) mlx->player.y;
+		// printf("ray %d %d\n", ray.map_x, ray.map_y);
 		set_delta_dist_ray(&ray);
 		set_side_dist_ray(&ray, player);
 		hit_ray(&ray, mlx);
