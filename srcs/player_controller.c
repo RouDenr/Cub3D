@@ -6,13 +6,13 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 00:52:05 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/03 22:06:27 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/04 23:19:18 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/cub3D.h"
 #ifndef FT_ROTATE_SPEED
-# define FT_ROTATE_SPEED .2f
+# define FT_ROTATE_SPEED .02f
 #endif
 #ifndef FT_STEP_SPEED
 # define FT_STEP_SPEED .1f
@@ -59,15 +59,26 @@ void	player_rotate(t_player *player, float rotate)
 	%f\n", player->dir.plane_x, player->dir.plane_y);
 }
 
+/**
+ * @brief
+ *
+ * @param	map		Game map
+ * @param	player	Player info
+ * @param	keycode	key code pressed by the user:
+ * 					13	- W;		126	- arrow up;
+ * 					1	- S;		125	- arrow down;
+ * 					2	- D;		124	- arrow right;		-25	- mouse right;
+ * 					0	- D;		123	- arrow left;		25	- mouse left;
+ */
 void	player_control(t_map *map, t_player *player, int keycode)
 {
 	if (keycode == 13 || keycode == 126)
 		player_move(map, player, 1.f);
 	if (keycode == 1 || keycode == 125)
 		player_move(map, player, -1);
-	if (keycode == 2 || keycode == 124)
+	if (keycode == 2 || keycode == 124 || keycode == -25)
 		player_rotate(player, -1.f);
-	if (keycode == 0 || keycode == 123)
+	if (keycode == 0 || keycode == 123 || keycode == 25)
 		player_rotate(player, 1.f);
 	printf("%d\n", keycode);
 }

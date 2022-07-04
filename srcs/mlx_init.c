@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 00:25:18 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/01 04:00:22 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/04 23:18:48 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,17 @@
 int	exit_hook(void)
 {
 	exit(0);
+}
+
+int	mouse_hook(int x, int y, t_mlx *mlx)
+{
+	if (x > FT_WIN_W_CENTER)
+		player_control(mlx->map, &mlx->player, -25);
+	if (x < FT_WIN_W_CENTER)
+		player_control(mlx->map, &mlx->player, 25);
+	mlx_mouse_move(mlx->win, FT_WIN_W_CENTER, FT_WIN_H_CENTER);
+	printf("m - %d %d\n", x, y);
+	return (0);
 }
 
 int	key_hook(int keycode, t_mlx *mlx)
@@ -68,6 +79,10 @@ t_mlx	game_init(t_map *map)
 	mlx.player = player_init(map->map_arr);
 	mlx_hook(mlx.win, 17, 0L, exit_hook, &mlx);
 	mlx_hook(mlx.win, 2, 1L << 0, key_hook, &mlx);
+	mlx_hook(mlx.win, 6, 1L << 0, mouse_hook, &mlx);
+	mlx_mouse_hide();
+	// mlx_mouse_hook(mlx.win, mouse_hook, &mlx);
+	// mlx_mouse_get_pos()
 	mlx_loop_hook(mlx.init, do_next_frame, &mlx);
 	mlx_loop(mlx.init);
 	return (mlx);

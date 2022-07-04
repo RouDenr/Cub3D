@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:48:26 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/03 21:57:33 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/04 23:16:22 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,16 @@
 #  define FT_WIN_H 1080
 # endif
 
+# ifndef FT_WIN_H_CENTER
+#  define FT_WIN_H_CENTER FT_WIN_H / 2
+# endif
+
 # ifndef FT_WIN_W
 #  define FT_WIN_W 1920
+# endif
+
+# ifndef FT_WIN_W_CENTER
+#  define FT_WIN_W_CENTER FT_WIN_W / 2
 # endif
 
 # define FT_PL_STEP	0.5
@@ -52,6 +60,10 @@ typedef	struct s_player_dir
 	float	plane_y;
 } t_player_dir;
 
+typedef struct s_mouse
+{
+	int	mouse_hook;
+}			t_mouse;
 
 typedef struct s_player
 {
