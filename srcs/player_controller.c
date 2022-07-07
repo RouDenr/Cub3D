@@ -6,37 +6,58 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 00:52:05 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/04 23:19:18 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/07 22:43:20 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/cub3D.h"
 #ifndef FT_ROTATE_SPEED
-# define FT_ROTATE_SPEED .02f
+# define FT_ROTATE_SPEED .05f
 #endif
 #ifndef FT_STEP_SPEED
-# define FT_STEP_SPEED .1f
+# define FT_STEP_SPEED .10f
 #endif
 
-void	player_move(t_map *map, t_player *player, int step)
+void	player_move_right(t_map *map, t_player *player, int step)
 {
-	int		x;
-	int		y;
+	float	x;
+	float	y;
 	char	cell;
 
-	x = (int)(player->x + player->dir.x * FT_STEP_SPEED * step);
-	cell = map->map_arr[(int) player->y][x];
+	x = (player->x + player->dir.y * FT_STEP_SPEED * step * -1);
+	y = (player->y + player->dir.x * FT_STEP_SPEED * step);
+	cell = map->map_arr[(int) player->y][(int) x];
 	if (cell == '0')
 	{
-		player->x += player->dir.x * FT_STEP_SPEED * step;
+		player->x = x;
 	}
-	y = (int)(player->y + player->dir.y * FT_STEP_SPEED * step);
-	cell = map->map_arr[y][(int) player->x];
+	cell = map->map_arr[(int) y][(int) player->x];
 	if (cell == '0')
 	{
-		player->y += player->dir.y * FT_STEP_SPEED * step;
+		player->y = y;
 	}
-	printf("%d %d %c\n", x, y, cell);
+	printf("%f %f %c\n", x, y, cell);
+}
+
+void	player_move_up(t_map *map, t_player *player, int step)
+{
+	float	x;
+	float	y;
+	char	cell;
+
+	x = (player->x + player->dir.x * FT_STEP_SPEED * step);
+	cell = map->map_arr[(int) player->y][(int) x];
+	if (cell == '0')
+	{
+		player->x = x;
+	}
+	y = (player->y + player->dir.y  * FT_STEP_SPEED * step);
+	cell = map->map_arr[(int) y][(int) player->x];
+	if (cell == '0')
+	{
+		player->y = y;
+	}
+	printf("%f %f %c\n", player->x, player->y, cell);
 }
 
 void	player_rotate(t_player *player, float rotate)
@@ -68,17 +89,22 @@ void	player_rotate(t_player *player, float rotate)
  * 					13	- W;		126	- arrow up;
  * 					1	- S;		125	- arrow down;
  * 					2	- D;		124	- arrow right;		-25	- mouse right;
- * 					0	- D;		123	- arrow left;		25	- mouse left;
+ * 					0	- A;		123	- arrow left;		25	- mouse left;
+ * 					49	- Spase
  */
 void	player_control(t_map *map, t_player *player, int keycode)
 {
-	if (keycode == 13 || keycode == 126)
-		player_move(map, player, 1.f);
-	if (keycode == 1 || keycode == 125)
-		player_move(map, player, -1);
-	if (keycode == 2 || keycode == 124 || keycode == -25)
+	if (keycode == 13)
+		player_move_up(map, player, 1.f);
+	if (keycode == 1)
+		player_move_up(map, player, -1.f);
+	if (keycode == 2)
+		player_move_right(map, player, -1.f);
+	if (keycode == 0)
+		player_move_right(map, player, 1.f);
+	if (keycode == 124 || keycode == -25)
 		player_rotate(player, -1.f);
-	if (keycode == 0 || keycode == 123 || keycode == 25)
+	if (keycode == 123 || keycode == 25)
 		player_rotate(player, 1.f);
 	printf("%d\n", keycode);
 }
