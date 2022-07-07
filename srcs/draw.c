@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 20:07:56 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/08 00:26:00 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/08 00:56:58 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,9 @@ void	draw_ver_line_wall(t_mlx *mlx, int x, int y[], t_wall wall)
 	i = y[0];
 	while (i <= y[1])
 	{
-		wall_i = (int) wall.tex_y[0] & (wall.img->h - 1);
+		wall_i = (int) wall.tex_y[0];
 		wall.tex_y[0] += wall.step;
+
 		color = get_pixel_by_xy(wall.img, wall.tex_x, wall_i);
 		ft_pixel_put(&mlx->screen, x, i, color);
 		i++;
