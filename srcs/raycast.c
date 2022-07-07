@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 20:07:56 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/05 08:27:33 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/08 00:22:05 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,30 +69,49 @@ void	hit_ray(t_ray *ray, t_mlx *mlx)
 		}
 		if (mlx->map->map_arr[ray->map_y][ray->map_x] != '0')
 		{
-			// mlx->map->map_arr[ray->map_y][ray->map_x] = '*';
 			hit = 1;
 		}
 	}
 }
 
+t_wall	get_wall_info(t_mlx *mlx, t_ray *ray, t_draw_info info)
+{
+	float	wall_x;
+	t_wall	wall_info;
+
+	wall_info.img = get_wall_by_dir(&mlx->sources, ray);
+	if (ray->side == 0)
+		wall_x = mlx->player.y + info.w_dist * ray->ray_y;
+	else
+		wall_x = mlx->player.x + info.w_dist * ray->ray_x;
+	wall_x -= floorf(wall_x);
+	wall_info.tex_x = (int) (wall_x * (float) wall_info.img->w);
+	if (ray->side == 0 && ray->ray_x > 0)
+		wall_info.tex_x = wall_info.img->w - wall_info.tex_x - 1;
+	if (ray->side == 1 && ray->ray_x < 0)
+		wall_info.tex_x = wall_info.img->w - wall_info.tex_x - 1;
+	wall_info.step = 1.f * wall_info.img->h / info.height_dr;
+	wall_info.tex_y[0] = (info.y[0] - mlx->screen.h / 2 + info.height_dr / 2)
+		* wall_info.step;
+	return (wall_info);
+}
+
 void	draw_ray(t_ray *ray, t_mlx *mlx)
 {
-	int			height_dr;
-	int			y[2];
-	float		w_dist;
+	t_draw_info	info;
 
 	if (ray->side == 0)
-		w_dist = (ray->side_dist_x - ray->delta_dist_x);
+		info.w_dist = (ray->side_dist_x - ray->delta_dist_x);
 	else
-		w_dist = (ray->side_dist_y - ray->delta_dist_y);
-	height_dr = (int)(mlx->screen.h / w_dist);
-	y[0] = -height_dr / 2 + mlx->screen.h / 2;
-	if (y[0] < 0)
-		y[0] = 0;
-	y[1] = height_dr / 2 + mlx->screen.h / 2;
-	if (y[1] >= mlx->screen.h)
-		y[1] = mlx->screen.h - 1;
-	draw_ver_line_wall(mlx, ray->x, y, get_wall_by_dir(&mlx->sources, ray));
+		info.w_dist = (ray->side_dist_y - ray->delta_dist_y);
+	info.height_dr = (int)(mlx->screen.h / info.w_dist);
+	info.y[0] = -info.height_dr / 2 + mlx->screen.h / 2;
+	if (info.y[0] < 0)
+		info.y[0] = 0;
+	info.y[1] = info.height_dr / 2 + mlx->screen.h / 2;
+	if (info.y[1] >= mlx->screen.h)
+		info.y[1] = mlx->screen.h - 1;
+	draw_ver_line_wall(mlx, ray->x, info.y, get_wall_info(mlx, ray, info));
 }
 
 void	raycasting(t_mlx *mlx)

@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:48:26 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/05 08:27:31 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/08 00:15:11 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,22 @@ typedef struct s_ray
 
 }			t_ray;
 
+typedef struct	s_draw_info
+{
+	int			height_dr;
+	int			y[2];
+	float		w_dist;
+}				t_draw_info;
+
+typedef struct	s_wall
+{
+	t_img	*img;
+	float	tex_x;
+	float	tex_y[2];
+	float	step;
+}				t_wall;
+
+
 typedef struct s_sources
 {
 	t_img	wall_no;
@@ -115,7 +131,7 @@ void		player_control(t_map *map, t_player *player, int keycode);
 
 void		raycasting(t_mlx *mlx);
 void		ft_pixel_put(t_img *img, int x, int y, int color);
-void		draw_ver_line_wall(t_mlx *mlx, int x, int y[], t_img *img);
+void		draw_ver_line_wall(t_mlx *mlx, int x, int y[], t_wall wall);
 void		draw_background(t_mlx *mlx);
 t_img		*get_wall_by_dir(t_sources *sourcer, t_ray *ray);
 
