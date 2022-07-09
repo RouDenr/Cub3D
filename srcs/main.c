@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 21:19:09 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/01 03:21:15 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/09 19:36:28 by vseel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char *argv[])
 	ft_memset(&map, 0, sizeof map);
 	map.color_ceil = -2;
 	map.color_floor = -2;
-	if (!parse_main(argc, argv, &map))
+	if (!parse_main(argv[1], &map))
 		return (1);
 	game_init(&map);
 	ft_lstclear_dyarr(&map.map_arr_l, free);

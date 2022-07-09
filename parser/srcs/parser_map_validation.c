@@ -6,7 +6,7 @@
 /*   By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:13:10 by vseel             #+#    #+#             */
-/*   Updated: 2022/07/09 15:41:11 by vseel            ###   ########.fr       */
+/*   Updated: 2022/07/09 19:28:54 by vseel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,13 @@ void	double_arr_free(char **strs)
 
 char	is_valid_map_line(char *line)
 {
-	char	allowed_chars[] = "01NSEW \n";
+	const char	allowed_chars[] = "01NSEW \n";
 
-	if (!line)
-		return (-1);
-	if (*line == '\n')
+	if (!line || *line == '\n')
 		return (0);
 	while (*line)
 	{
-		if(!ft_strchr(allowed_chars, *line))
+		if (!ft_strchr(allowed_chars, *line))
 			return (0);
 		++line;
 	}
@@ -67,7 +65,8 @@ char	get_texture_path(char **tmp, char **wall)
 	if (*wall)
 	{
 		double_arr_free(tmp);
-		return (throw_error("invalid config line: dublicated instruction", 0, 'm'));
+		return (throw_error("invalid config line: dublicated instruction",
+				0, 'm'));
 	}
 	*wall = ft_substr(tmp[1], 0, ft_strlen(tmp[1]) - 1);
 	if (!*wall)
@@ -134,7 +133,8 @@ char	get_color(char **tmp, int *color)
 	if (*color != -2)
 	{
 		double_arr_free(tmp);
-		return (throw_error("invalid config line: dublicated instruction", 0, 'm'));
+		return (throw_error("invalid config line: dublicated instruction",
+				0, 'm'));
 	}
 	*color = parse_color(tmp[1]);
 	if (*color == -1)
