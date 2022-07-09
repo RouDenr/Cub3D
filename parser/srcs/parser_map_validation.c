@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_map_validation.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:13:10 by vseel             #+#    #+#             */
-/*   Updated: 2022/06/30 00:16:32 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/09 15:41:11 by vseel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,12 @@ int	is_valid_color_str(char *str)
 	int	length;
 
 	length = ft_strlen(str);
+	if (str[length - 1] == '\n')
+		str[length-- - 1] = 0;
 	if (length > 3 || length == 0)
 		return (0);
 	while (--length != -1)
-		if ((str[length] < '0' || str[length] > '9') && str[length] != '\n') // KOSTYL
+		if (str[length] < '0' || str[length] > '9')
 			return (0);
 	return (1);
 }
@@ -102,7 +104,7 @@ int	parse_color(char *str)
 		|| !is_valid_color_str(colors_str[2]))
 	{
 		double_arr_free(colors_str);
-		return (throw_error("invalid config line", -2, 'm'));
+		return (throw_error("invalid config line", -1, 'm'));
 	}
 	colors[0] = ft_atoi(colors_str[0]);
 	colors[1] = ft_atoi(colors_str[1]);
