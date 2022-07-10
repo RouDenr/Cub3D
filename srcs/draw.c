@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 20:07:56 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/08 00:56:58 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/08 01:11:19 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,9 @@ t_img	*get_wall_by_dir(t_sources *sourcer, t_ray *ray)
 
 	x = ray->ray_x;
 	y = ray->ray_y;
-	if (x > 0 && (y <= 1.f || y >= -1.f))
-		return (&sourcer->wall_ea);
-	if (y > 0 && (x <= 1.f || x >= -1.f))
-		return (&sourcer->wall_no);
-	if (y < 0 && (x <= 1.f || x >= -1.f))
-		return (&sourcer->wall_so);
+	if (y > 0)
+	{
+		
+	}
 	return (&sourcer->wall_we);
 }

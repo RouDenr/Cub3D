@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 00:25:18 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/07 22:32:17 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/08 01:05:40 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	key_hook(int keycode, t_mlx *mlx)
 		exit(0);
 	}
 	if (keycode == 49)
-		printf("x - %f y - %f\n", mlx->player.x, mlx->player.y);
+		printf("x - %f y - %f\n", mlx->player.dir.x, mlx->player.dir.y);
 	if (keycode == 13 || keycode == 0 || keycode == 1 || keycode == 2)
 		player_control(mlx->map, &mlx->player, keycode);
 	if (keycode == 126 || keycode == 123 || keycode == 125 || keycode == 124)
