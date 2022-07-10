@@ -6,7 +6,7 @@
 #    By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/30 21:34:46 by vseel             #+#    #+#              #
-#    Updated: 2022/06/30 21:52:25 by vseel            ###   ########.fr        #
+#    Updated: 2022/07/10 19:03:13 by vseel            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ RM		=	rm -rf
 
 PREFIX	:=	$(MAKELEVEL)>>
 
-.PHONY: all clean fclean re pack binary libft
+.PHONY: all clean fclean re pack binary libft test_sh
 
 # Building parser archive for minishell binary
 all			: $(DEPS) $(NAME)
@@ -110,6 +110,11 @@ libft:
 	@echo "\n$(PREFIX) Invoking parser libft makefile"
 	@$(MAKE) -C $(LIB_DIR)
 	@echo "$(PREFIX) Done! \n"
+#-------------
+
+# Run shell tests for parcer
+test_sh:
+	@bash tests/run_tests.sh
 #-------------
 
 ifeq ($(MAKECMDGOALS),fclean)
