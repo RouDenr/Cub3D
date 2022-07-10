@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 20:07:56 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/08 01:11:19 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/10 22:48:40 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,18 @@ void	draw_ver_line_wall(t_mlx *mlx, int x, int y[], t_wall wall)
 
 t_img	*get_wall_by_dir(t_sources *sourcer, t_ray *ray)
 {
-	float	x;
-	float	y;
+	int	x;
+	int	y;
 
-	x = ray->ray_x;
-	y = ray->ray_y;
-	if (y > 0)
+	x = ray->step_x;
+	y = ray->step_y;
+	if (ray->side)
 	{
-		
+		if (y < 0)
+			return (&sourcer->wall_no);
+		return (&sourcer->wall_so);
 	}
-	return (&sourcer->wall_we);
+	if (x > 0)
+		return (&sourcer->wall_we);
+	return (&sourcer->wall_ea);
 }

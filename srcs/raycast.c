@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 20:07:56 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/08 00:22:05 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/10 22:22:44 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ t_wall	get_wall_info(t_mlx *mlx, t_ray *ray, t_draw_info info)
 		wall_x = mlx->player.x + info.w_dist * ray->ray_x;
 	wall_x -= floorf(wall_x);
 	wall_info.tex_x = (int) (wall_x * (float) wall_info.img->w);
-	if (ray->side == 0 && ray->ray_x > 0)
-		wall_info.tex_x = wall_info.img->w - wall_info.tex_x - 1;
-	if (ray->side == 1 && ray->ray_x < 0)
+	// if (ray->side == 0 && ray->ray_x > 0)
+		// wall_info.tex_x = wall_info.img->w - wall_info.tex_x - 1;
+	// if (ray->side == 1 && ray->ray_x < 0)
 		wall_info.tex_x = wall_info.img->w - wall_info.tex_x - 1;
 	wall_info.step = 1.f * wall_info.img->h / info.height_dr;
 	wall_info.tex_y[0] = (info.y[0] - mlx->screen.h / 2 + info.height_dr / 2)
