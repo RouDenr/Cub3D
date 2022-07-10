@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:13:05 by vseel             #+#    #+#             */
-/*   Updated: 2022/07/01 00:46:58 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/09 20:05:57 by vseel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <unistd.h>
 # include <limits.h>
 
-# define VISUALIZE_MAP	1
+# define VISUALIZE_MAP	0
 # define DEBUG_MSG		"\n>>> To disable cmd debug output \
 change define in \"parser.h\"\n\n"
 
@@ -52,7 +52,7 @@ typedef struct s_map {
 typedef struct s_list	t_list;
 
 /* parser */
-int		parse_main(int argc, char **argv, t_map *map);
+int		parse_main(char *map_file, t_map *map);
 
 /* parser_exit_utils */
 int		throw_error(char *msg, int exit_code, char mode);
