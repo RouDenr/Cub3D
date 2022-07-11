@@ -6,7 +6,7 @@
 #    By: decordel <decordel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 21:18:07 by decordel          #+#    #+#              #
-#    Updated: 2022/07/11 22:12:09 by decordel         ###   ########.fr        #
+#    Updated: 2022/07/11 22:36:06 by decordel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,14 +24,14 @@ SRCS	=	main.c				\
 			draw.c				\
 			walls.c				\
 			raycast.c			\
-			logs.c				\
+			minimap.c			\
 			game.c
 
 
 CC		=	clang
 
-# CFLAGS	=	-Wall -Wextra -g
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -g
+# CFLAGS	=	-Wall -Wextra -Werror
 
 SRCS	:=	$(foreach file,$(SRCS),$S$(file))
 

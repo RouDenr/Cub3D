@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 21:43:47 by decordel          #+#    #+#             */
-/*   Updated: 2022/06/01 13:44:24 by vseel            ###   ########.fr       */
+/*   Updated: 2022/07/11 22:45:12 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+
+size_t	ft_strmaslen(char **s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s && s[i])
+		++i;
+	return (i);
+}
 
 size_t	ft_strlen(const char *s)
 {

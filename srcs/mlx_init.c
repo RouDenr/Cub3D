@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 00:25:18 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/11 22:22:12 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/11 23:04:21 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@ int	exit_hook(void)
 
 int	mouse_hook(int x, int y, t_mlx *mlx)
 {
+	(void) y;
 	if (x > FT_WIN_W_CENTER)
 		player_control(mlx->map, &mlx->player, -25);
 	if (x < FT_WIN_W_CENTER)
 		player_control(mlx->map, &mlx->player, 25);
 	mlx_mouse_move(mlx->win, FT_WIN_W_CENTER, FT_WIN_H_CENTER);
+	do_next_frame(mlx);
 	return (0);
 }
 
@@ -38,6 +40,7 @@ int	key_hook(int keycode, t_mlx *mlx)
 		player_control(mlx->map, &mlx->player, keycode);
 	if (keycode == 126 || keycode == 123 || keycode == 125 || keycode == 124)
 		player_control(mlx->map, &mlx->player, keycode);
+	do_next_frame(mlx);
 	return (0);
 }
 
@@ -74,11 +77,12 @@ t_mlx	game_init(t_map *map)
 	mlx.screen.h = FT_WIN_H;
 	mlx.screen.w = FT_WIN_W;
 	mlx.player = player_init(map->map_arr);
+	do_next_frame(&mlx);
 	mlx_hook(mlx.win, 17, 0L, exit_hook, &mlx);
 	mlx_hook(mlx.win, 2, 1L << 0, key_hook, &mlx);
-	mlx_hook(mlx.win, 6, 1L << 0, mouse_hook, &mlx);
-	mlx_mouse_hide();
-	mlx_loop_hook(mlx.init, do_next_frame, &mlx);
+	// mlx_hook(mlx.win, 6, 1L << 0, mouse_hook, &mlx);
+	// mlx_mouse_hide();
+	// mlx_loop_hook(mlx.init, do_next_frame, &mlx);
 	mlx_loop(mlx.init);
 	return (mlx);
 }
