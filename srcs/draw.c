@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 20:07:56 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/10 22:48:40 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/11 22:11:30 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	draw_background(t_mlx *mlx)
 
 	i = 0;
 	color = mlx->map->color_ceil;
-	while (i < FT_WIN_H)
+	while (i < FT_WIN_H - 1)
 	{
 		j = 0;
 		if (i == FT_WIN_H / 2)
@@ -42,7 +42,7 @@ void	draw_background(t_mlx *mlx)
 	}
 }
 
-unsigned int get_pixel_by_xy(t_img *img, int x, int y)
+unsigned int	get_pixel_by_xy(t_img *img, int x, int y)
 {
 	char			*dst;
 
@@ -52,8 +52,8 @@ unsigned int get_pixel_by_xy(t_img *img, int x, int y)
 
 void	draw_ver_line_wall(t_mlx *mlx, int x, int y[], t_wall wall)
 {
-	int	i;
-	int	wall_i;
+	int				i;
+	int				wall_i;
 	unsigned int	color;
 
 	i = y[0];
@@ -61,27 +61,8 @@ void	draw_ver_line_wall(t_mlx *mlx, int x, int y[], t_wall wall)
 	{
 		wall_i = (int) wall.tex_y[0];
 		wall.tex_y[0] += wall.step;
-
 		color = get_pixel_by_xy(wall.img, wall.tex_x, wall_i);
 		ft_pixel_put(&mlx->screen, x, i, color);
 		i++;
 	}
-}
-
-t_img	*get_wall_by_dir(t_sources *sourcer, t_ray *ray)
-{
-	int	x;
-	int	y;
-
-	x = ray->step_x;
-	y = ray->step_y;
-	if (ray->side)
-	{
-		if (y < 0)
-			return (&sourcer->wall_no);
-		return (&sourcer->wall_so);
-	}
-	if (x > 0)
-		return (&sourcer->wall_we);
-	return (&sourcer->wall_ea);
 }

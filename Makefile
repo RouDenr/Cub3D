@@ -6,7 +6,7 @@
 #    By: decordel <decordel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 21:18:07 by decordel          #+#    #+#              #
-#    Updated: 2022/07/03 21:19:49 by decordel         ###   ########.fr        #
+#    Updated: 2022/07/11 22:12:09 by decordel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS	=	main.c				\
 			player.c			\
 			player_controller.c	\
 			draw.c				\
+			walls.c				\
 			raycast.c			\
 			logs.c				\
 			game.c
@@ -29,8 +30,8 @@ SRCS	=	main.c				\
 
 CC		=	clang
 
-CFLAGS	=	-Wall -Wextra -g
-# CFLAGS	=	-Wall -Wextra -Werror
+# CFLAGS	=	-Wall -Wextra -g
+CFLAGS	=	-Wall -Wextra -Werror
 
 SRCS	:=	$(foreach file,$(SRCS),$S$(file))
 
@@ -150,7 +151,7 @@ mlx:
 #! debug ---------------------------------
 MESS	=
 
-ARGS	= maps/test.cub
+ARGS	= maps/map1.cub
 
 git		:
 	git add .

@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 00:52:05 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/07 22:43:20 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/11 22:09:45 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	player_move_up(t_map *map, t_player *player, int step)
 	{
 		player->x = x;
 	}
-	y = (player->y + player->dir.y  * FT_STEP_SPEED * step);
+	y = (player->y + player->dir.y * FT_STEP_SPEED * step);
 	cell = map->map_arr[(int) y][(int) player->x];
 	if (cell == '0')
 	{

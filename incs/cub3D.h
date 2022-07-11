@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:48:26 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/08 00:15:11 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/11 22:12:27 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,9 @@ void		raycasting(t_mlx *mlx);
 void		ft_pixel_put(t_img *img, int x, int y, int color);
 void		draw_ver_line_wall(t_mlx *mlx, int x, int y[], t_wall wall);
 void		draw_background(t_mlx *mlx);
+
 t_img		*get_wall_by_dir(t_sources *sourcer, t_ray *ray);
+t_wall		get_wall_info(t_mlx *mlx, t_ray *ray, t_draw_info info);
 
 int	print_log_ray(int keycode, t_ray *ray);
 

@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 20:07:56 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/10 22:22:44 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/11 22:11:07 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,28 +74,6 @@ void	hit_ray(t_ray *ray, t_mlx *mlx)
 	}
 }
 
-t_wall	get_wall_info(t_mlx *mlx, t_ray *ray, t_draw_info info)
-{
-	float	wall_x;
-	t_wall	wall_info;
-
-	wall_info.img = get_wall_by_dir(&mlx->sources, ray);
-	if (ray->side == 0)
-		wall_x = mlx->player.y + info.w_dist * ray->ray_y;
-	else
-		wall_x = mlx->player.x + info.w_dist * ray->ray_x;
-	wall_x -= floorf(wall_x);
-	wall_info.tex_x = (int) (wall_x * (float) wall_info.img->w);
-	// if (ray->side == 0 && ray->ray_x > 0)
-		// wall_info.tex_x = wall_info.img->w - wall_info.tex_x - 1;
-	// if (ray->side == 1 && ray->ray_x < 0)
-		wall_info.tex_x = wall_info.img->w - wall_info.tex_x - 1;
-	wall_info.step = 1.f * wall_info.img->h / info.height_dr;
-	wall_info.tex_y[0] = (info.y[0] - mlx->screen.h / 2 + info.height_dr / 2)
-		* wall_info.step;
-	return (wall_info);
-}
-
 void	draw_ray(t_ray *ray, t_mlx *mlx)
 {
 	t_draw_info	info;
@@ -129,7 +107,6 @@ void	raycasting(t_mlx *mlx)
 		ray.map_x = (int) mlx->player.x;
 		ray.ray_y = mlx->player.dir.y + mlx->player.dir.plane_y * cam_x;
 		ray.map_y = (int) mlx->player.y;
-		// printf("ray %d %d\n", ray.map_x, ray.map_y);
 		set_delta_dist_ray(&ray);
 		set_side_dist_ray(&ray, player);
 		hit_ray(&ray, mlx);
