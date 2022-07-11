@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 01:02:34 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/08 00:50:07 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/11 22:22:56 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	find_pl(t_player *player, char **map)
 				player->y = i + .5f;
 				init_player_dir(player, map[i][j]);
 				map[i][j] = '0';
-				printf("pl %f %f\n", player->x, player->y);
 				return ;
 			}
 			j++;

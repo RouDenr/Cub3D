@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 00:52:05 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/11 22:09:45 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/11 22:22:50 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	player_move_right(t_map *map, t_player *player, int step)
 	{
 		player->y = y;
 	}
-	printf("%f %f %c\n", x, y, cell);
 }
 
 void	player_move_up(t_map *map, t_player *player, int step)
@@ -57,7 +56,6 @@ void	player_move_up(t_map *map, t_player *player, int step)
 	{
 		player->y = y;
 	}
-	printf("%f %f %c\n", player->x, player->y, cell);
 }
 
 void	player_rotate(t_player *player, float rotate)
@@ -75,9 +73,6 @@ void	player_rotate(t_player *player, float rotate)
 		- player->dir.plane_y * sin(FT_ROTATE_SPEED * rotate);
 	player->dir.plane_y = old_plane_x * sin(FT_ROTATE_SPEED * rotate)
 		+ player->dir.plane_y * cos(FT_ROTATE_SPEED * rotate);
-	printf("player rotate x = %f y = %f\n", player->dir.x, player->dir.y);
-	printf("player plane x = %f y =\
-	%f\n", player->dir.plane_x, player->dir.plane_y);
 }
 
 /**
@@ -106,5 +101,4 @@ void	player_control(t_map *map, t_player *player, int keycode)
 		player_rotate(player, -1.f);
 	if (keycode == 123 || keycode == 25)
 		player_rotate(player, 1.f);
-	printf("%d\n", keycode);
 }

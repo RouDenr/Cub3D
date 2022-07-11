@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:48:26 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/11 22:12:27 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/11 22:20:57 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@
 # ifndef FT_WIN_W_CENTER
 #  define FT_WIN_W_CENTER FT_WIN_W / 2
 # endif
-
-# define FT_PL_STEP	0.5
 
 # include "../libft/libft.h"
 # include "../parser/incs/parser.h"

@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 00:25:18 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/10 22:50:10 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/11 22:22:12 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	mouse_hook(int x, int y, t_mlx *mlx)
 	if (x < FT_WIN_W_CENTER)
 		player_control(mlx->map, &mlx->player, 25);
 	mlx_mouse_move(mlx->win, FT_WIN_W_CENTER, FT_WIN_H_CENTER);
-	printf("m - %d %d\n", x, y);
 	return (0);
 }
 
@@ -35,8 +34,6 @@ int	key_hook(int keycode, t_mlx *mlx)
 		mlx_destroy_window(mlx->init, mlx->win);
 		exit(0);
 	}
-	if (keycode == 49)
-		printf("x - %f y - %f\n", mlx->player.dir.x, mlx->player.dir.y);
 	if (keycode == 13 || keycode == 0 || keycode == 1 || keycode == 2)
 		player_control(mlx->map, &mlx->player, keycode);
 	if (keycode == 126 || keycode == 123 || keycode == 125 || keycode == 124)

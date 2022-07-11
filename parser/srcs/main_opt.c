@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_opt.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:13:10 by vseel             #+#    #+#             */
-/*   Updated: 2022/06/30 22:40:51 by vseel            ###   ########.fr       */
+/*   Updated: 2022/07/11 22:20:34 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (throw_error("one argument excepted", 0, 'm'));
-		
+
 	ft_memset(&map, 0, sizeof map);
 	map.color_ceil = -2;
 	map.color_floor = -2;
 
-	if (!parse_main(argc, argv, &map))
+	if (!parse_main(argv[1], &map))
 		return (1);
 
 	ft_lstclear_dyarr(&map.map_arr_l, destroy_dyarr_struc);
@@ -51,7 +51,7 @@ int	main(int argc, char **argv)
 
 		F
 		C
-	
+
 	Possible map chars:
 		0 - empty space
 		1 - wall
@@ -76,34 +76,34 @@ int	main(int argc, char **argv)
 		// 	tmp = ft_substr(line, 3, ft_strlen(line + 3));
 		// 	if (!tmp)
 		// 		return (throw_error("substr_no", 11, 'm'));
-		// 	map.wall_no = tmp;	
+		// 	map.wall_no = tmp;
 		// }
 		// else if (!ft_memcmp("SO", line, 2))
 		// {
 		// 	tmp = ft_substr(line, 3, ft_strlen(line + 3));
 		// 	if (!tmp)
 		// 		return (throw_error("substr_so", 12, 'm'));
-		// 	map.wall_so = tmp;	
+		// 	map.wall_so = tmp;
 		// }
 		// else if (!ft_memcmp("WE", line, 2))
 		// {
 		// 	tmp = ft_substr(line, 3, ft_strlen(line + 3));
 		// 	if (!tmp)
 		// 		return (throw_error("substr_we", 13, 'm'));
-		// 	map.wall_we = tmp;	
+		// 	map.wall_we = tmp;
 		// }
 		// else if (!ft_memcmp("EA", line, 2))
 		// {
 		// 	tmp = ft_substr(line, 3, ft_strlen(line + 3));
 		// 	if (!tmp)
 		// 		return (throw_error("substr_ea", 14, 'm'));
-		// 	map.wall_ea = tmp;	
+		// 	map.wall_ea = tmp;
 		// }
 		// else if (!ft_memcmp("F", line, 1))
 		// {
 		// 	tmp = ft_substr(line, 2, ft_strlen(line + 2));
 		// 	if (!tmp)
-		// 		return (throw_error("substr_f", 15, 'm'));	
+		// 		return (throw_error("substr_f", 15, 'm'));
 		// 	map.color_floor = parse_color(tmp);
 		// 	if (map.color_floor == -1)
 		// 		return (throw_error("Colors allowed from 0 to 255 inc", 16, 'm'));
