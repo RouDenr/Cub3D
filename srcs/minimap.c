@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 22:24:43 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/11 23:08:13 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/12 00:24:03 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,15 @@
 # define FT_Y_MINIMAP 20
 #endif
 
+int	is_map_player_pos(t_player *player, int x, int y)
+{
+	if ((int)(player->x) != x)
+		return (0);
+	if ((int)(player->y) != y)
+		return (0);
+	return (1);
+}
+
 void	draw_minimap(t_mlx *mlx, t_map *map)
 {
 	int		i;
@@ -45,10 +54,14 @@ void	draw_minimap(t_mlx *mlx, t_map *map)
 		j = FT_Y_MINIMAP;
 		while (j < FT_H_MINIMAP + FT_Y_MINIMAP)
 		{
-			c = map->map_arr[(int)((j - FT_Y_MINIMAP) / y_map)][(int)((i - FT_X_MINIMAP) / x_map)];
+			c = map->map_arr[(int)((j - FT_Y_MINIMAP) / y_map)]
+			[(int)((i - FT_X_MINIMAP) / x_map)];
 			if (c == '1')
 				ft_pixel_put(&mlx->screen, i, j, 0x000000);
-			// else if ((j - FT_Y_MINIMAP) / y_map )
+			else if (is_map_player_pos(&mlx->player,
+					(int)((i - FT_X_MINIMAP) / x_map),
+				(int)((j - FT_Y_MINIMAP) / y_map)))
+				ft_pixel_put(&mlx->screen, i, j, 0xff0000);
 			j++;
 		}
 		i++;
