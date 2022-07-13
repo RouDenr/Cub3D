@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 22:24:43 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/14 00:54:23 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/14 00:59:48 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 
 #ifndef FT_W_MINIMAP
 # define FT_W_MINIMAP 300
-#endif
-
-#ifndef FT_H_MINIMAP
-# define FT_H_MINIMAP 300
 #endif
 
 #ifndef FT_X_MINIMAP
@@ -76,5 +72,4 @@ void	init_minimap(t_mlx *mlx, t_map *map)
 	x_scale = 1.f * ft_strlen(*map->map_arr) * --scale_factor;
 	y_scale = 1.f * ft_strmaslen(map->map_arr) * scale_factor;
 	draw_minimap(mlx, scale_factor, x_scale, y_scale);
-	printf("%f %f\n", x_scale, y_scale);
 }
