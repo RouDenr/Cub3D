@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:48:26 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/11 22:34:56 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/14 00:47:12 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ void		draw_background(t_mlx *mlx);
 t_img		*get_wall_by_dir(t_sources *sourcer, t_ray *ray);
 t_wall		get_wall_info(t_mlx *mlx, t_ray *ray, t_draw_info info);
 
-void	draw_minimap(t_mlx *mlx, t_map *map);
+void	init_minimap(t_mlx *mlx, t_map *map);
 
 int	print_log_ray(int keycode, t_ray *ray);
 

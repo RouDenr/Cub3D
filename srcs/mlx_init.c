@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 00:25:18 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/11 23:04:21 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/14 00:55:55 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,10 @@ t_mlx	game_init(t_map *map)
 	do_next_frame(&mlx);
 	mlx_hook(mlx.win, 17, 0L, exit_hook, &mlx);
 	mlx_hook(mlx.win, 2, 1L << 0, key_hook, &mlx);
-	// mlx_hook(mlx.win, 6, 1L << 0, mouse_hook, &mlx);
-	// mlx_mouse_hide();
-	// mlx_loop_hook(mlx.init, do_next_frame, &mlx);
+	mlx_hook(mlx.win, 6, 1L << 0, mouse_hook, &mlx);
+	mlx_mouse_hide();
 	mlx_loop(mlx.init);
 	return (mlx);
 }
+
+// mlx_loop_hook(mlx.init, do_next_frame, &mlx);

@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 22:24:43 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/12 17:40:57 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/14 00:54:23 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,37 +37,44 @@ int	is_map_player_pos(t_player *player, int x, int y)
 	return (1);
 }
 
-void	draw_minimap(t_mlx *mlx, t_map *map)
+void	draw_minimap(t_mlx *mlx, int scale_factor, float x_scale, float y_scale)
 {
 	int		i;
 	int		j;
-	int		temp = 1;
-	float	x_map;
-	float	y_map;
 	char	c;
 
-	x_map = 1.f * ft_strlen(*map->map_arr);
-	while (x_map * temp <= FT_W_MINIMAP)
-		temp++;
-	x_map = 1.f * ft_strlen(*map->map_arr) * --temp;
-	y_map = 1.f * ft_strmaslen(map->map_arr) * temp;
-	printf("%f %f\n", x_map, y_map);
 	i = FT_X_MINIMAP;
-	while (i < x_map + FT_X_MINIMAP)
+	while (i < x_scale + FT_X_MINIMAP)
 	{
 		j = FT_Y_MINIMAP;
-		while (j < y_map + FT_Y_MINIMAP)
+		while (j < y_scale + FT_Y_MINIMAP)
 		{
-			c = map->map_arr[(int)((j - FT_Y_MINIMAP) / temp)]
-			[(int)((i - FT_X_MINIMAP) / temp)];
+			c = mlx->map->map_arr[(int)((j - FT_Y_MINIMAP) / scale_factor)]
+			[(int)((i - FT_X_MINIMAP) / scale_factor)];
 			if (c == '1')
 				ft_pixel_put(&mlx->screen, i, j, 0x000000);
 			else if (is_map_player_pos(&mlx->player,
-					(int)((i - FT_X_MINIMAP) / temp),
-				(int)((j - FT_Y_MINIMAP) / temp)))
+					(int)((i - FT_X_MINIMAP) / scale_factor),
+				(int)((j - FT_Y_MINIMAP) / scale_factor)))
 				ft_pixel_put(&mlx->screen, i, j, 0xff0000);
 			j++;
 		}
 		i++;
 	}
+}
+
+void	init_minimap(t_mlx *mlx, t_map *map)
+{
+	int		scale_factor;
+	float	x_scale;
+	float	y_scale;
+
+	scale_factor = 1;
+	x_scale = 1.f * ft_strlen(*map->map_arr);
+	while (x_scale * scale_factor <= FT_W_MINIMAP)
+		scale_factor++;
+	x_scale = 1.f * ft_strlen(*map->map_arr) * --scale_factor;
+	y_scale = 1.f * ft_strmaslen(map->map_arr) * scale_factor;
+	draw_minimap(mlx, scale_factor, x_scale, y_scale);
+	printf("%f %f\n", x_scale, y_scale);
 }

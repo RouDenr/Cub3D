@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 22:10:59 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/13 19:20:30 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/14 00:55:30 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ t_img	*get_wall_by_dir(t_sources *sourcer, t_ray *ray)
 		return (&sourcer->wall_so);
 	}
 	if (x > 0)
-	return (&sourcer->wall_ea);
-		return (&sourcer->wall_we);
+		return (&sourcer->wall_ea);
+	return (&sourcer->wall_we);
 }
 
 t_wall	get_wall_info(t_mlx *mlx, t_ray *ray, t_draw_info info)
