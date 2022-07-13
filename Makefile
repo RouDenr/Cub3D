@@ -6,7 +6,7 @@
 #    By: decordel <decordel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 21:18:07 by decordel          #+#    #+#              #
-#    Updated: 2022/07/11 22:36:06 by decordel         ###   ########.fr        #
+#    Updated: 2022/07/13 19:19:54 by decordel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -151,7 +151,7 @@ mlx:
 #! debug ---------------------------------
 MESS	=
 
-ARGS	= maps/map1.cub
+ARGS	= maps/test.cub
 
 git		:
 	git add .
