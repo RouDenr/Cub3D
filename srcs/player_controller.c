@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 00:52:05 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/11 22:22:50 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/13 19:15:56 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,11 @@ void	player_control(t_map *map, t_player *player, int keycode)
 	if (keycode == 1)
 		player_move_up(map, player, -1.f);
 	if (keycode == 2)
-		player_move_right(map, player, -1.f);
-	if (keycode == 0)
 		player_move_right(map, player, 1.f);
+	if (keycode == 0)
+		player_move_right(map, player, -1.f);
 	if (keycode == 124 || keycode == -25)
-		player_rotate(player, -1.f);
-	if (keycode == 123 || keycode == 25)
 		player_rotate(player, 1.f);
+	if (keycode == 123 || keycode == 25)
+		player_rotate(player, -1.f);
 }
