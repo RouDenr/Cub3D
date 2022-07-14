@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:48:26 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/14 00:47:12 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/14 03:12:47 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 
 # ifndef FT_WIN_W
 #  define FT_WIN_W 1920
+# endif
+
+# ifndef FT_DEBUG_MOD
+#  define FT_DEBUG_MOD 1
 # endif
 
 # ifndef FT_WIN_W_CENTER
@@ -126,6 +130,9 @@ int			do_next_frame(t_mlx *mlx);
 
 t_player	player_init(char **map);
 void		player_control(t_map *map, t_player *player, int keycode);
+void		player_move_right(t_map *map, t_player *player, int step);
+void		player_move_up(t_map *map, t_player *player, int step);
+void		player_rotate(t_player *player, float rotate);
 
 void		raycasting(t_mlx *mlx);
 void		ft_pixel_put(t_img *img, int x, int y, int color);

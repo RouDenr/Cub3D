@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_map_validation.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:13:10 by vseel             #+#    #+#             */
-/*   Updated: 2022/07/09 19:28:54 by vseel            ###   ########.fr       */
+/*   Updated: 2022/07/14 03:02:30 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	double_arr_free(char **strs)
 
 char	is_valid_map_line(char *line)
 {
-	const char	allowed_chars[] = "01NSEW \n";
+	const char	allowed_chars[] = "01NSEWD \n";
 
 	if (!line || *line == '\n')
 		return (0);
