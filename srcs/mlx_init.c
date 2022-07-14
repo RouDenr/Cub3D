@@ -6,58 +6,42 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 00:25:18 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/14 03:13:56 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/14 04:27:41 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/cub3D.h"
 
-int	exit_hook(void)
-{
-	exit(0);
-}
-
-int	mouse_hook(int x, int y, t_mlx *mlx)
-{
-	(void) y;
-	if (x > FT_WIN_W_CENTER)
-		player_control(mlx->map, &mlx->player, -25);
-	if (x < FT_WIN_W_CENTER)
-		player_control(mlx->map, &mlx->player, 25);
-	mlx_mouse_move(mlx->win, FT_WIN_W_CENTER, FT_WIN_H_CENTER);
-	do_next_frame(mlx);
-	return (0);
-}
-
-int	key_hook(int keycode, t_mlx *mlx)
-{
-	if (keycode == 53)
-	{
-		mlx_destroy_window(mlx->init, mlx->win);
-		exit(0);
-	}
-	if (keycode == 13 || keycode == 0 || keycode == 1 || keycode == 2)
-		player_control(mlx->map, &mlx->player, keycode);
-	if (keycode == 126 || keycode == 123 || keycode == 125 || keycode == 124)
-		player_control(mlx->map, &mlx->player, keycode);
-	if (keycode == 49)
-		player_control(mlx->map, &mlx->player, keycode);
-	do_next_frame(mlx);
-	return (0);
-}
-
-t_img	init_wall(t_mlx mlx, char *source)
+t_img	init_texture(t_mlx *mlx, char *source)
 {
 	int		x;
 	int		y;
 	t_img	img;
 
-	img.img = mlx_xpm_file_to_image(mlx.init, source, &x, &y);
+	img.img = mlx_xpm_file_to_image(mlx->init, source, &x, &y);
+	if (img.img == NULL)
+		ft_put_err("error: open img");
 	img.w = x;
 	img.h = y;
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 			&img.line_length, &img.endian);
 	return (img);
+}
+
+int	sources_init(t_mlx *mlx, t_map *map)
+{
+	mlx->sources.wall_ea = init_texture(mlx, map->wall_ea);
+	mlx->sources.wall_no = init_texture(mlx, map->wall_no);
+	mlx->sources.wall_so = init_texture(mlx, map->wall_so);
+	mlx->sources.wall_we = init_texture(mlx, map->wall_we);
+	mlx->sources.door = init_texture(mlx, "./texture/door.xpm");
+	mlx->screen.img = mlx_new_image(mlx->init, FT_WIN_W, FT_WIN_H);
+	mlx->screen.addr = mlx_get_data_addr(mlx->screen.img,
+			&mlx->screen.bits_per_pixel,
+			&mlx->screen.line_length,
+			&mlx->screen.endian);
+	mlx->screen.h = FT_WIN_H;
+	mlx->screen.w = FT_WIN_W;
 }
 
 t_mlx	game_init(t_map *map)
@@ -67,17 +51,7 @@ t_mlx	game_init(t_map *map)
 	mlx.map = map;
 	mlx.init = mlx_init();
 	mlx.win = mlx_new_window(mlx.init, FT_WIN_W, FT_WIN_H, "cub3D");
-	mlx.sources.wall_ea = init_wall(mlx, map->wall_ea);
-	mlx.sources.wall_no = init_wall(mlx, map->wall_no);
-	mlx.sources.wall_so = init_wall(mlx, map->wall_so);
-	mlx.sources.wall_we = init_wall(mlx, map->wall_we);
-	mlx.screen.img = mlx_new_image(mlx.init, FT_WIN_W, FT_WIN_H);
-	mlx.screen.addr = mlx_get_data_addr(mlx.screen.img,
-			&mlx.screen.bits_per_pixel,
-			&mlx.screen.line_length,
-			&mlx.screen.endian);
-	mlx.screen.h = FT_WIN_H;
-	mlx.screen.w = FT_WIN_W;
+	sources_init(&mlx, map);
 	mlx.player = player_init(map->map_arr);
 	do_next_frame(&mlx);
 	mlx_hook(mlx.win, 17, 0L, exit_hook, &mlx);

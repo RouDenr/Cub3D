@@ -6,7 +6,7 @@
 #    By: decordel <decordel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 21:18:07 by decordel          #+#    #+#              #
-#    Updated: 2022/07/14 03:07:12 by decordel         ###   ########.fr        #
+#    Updated: 2022/07/14 04:29:43 by decordel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRCS	=	main.c				\
 			player_controller.c	\
 			player_move.c		\
 			draw.c				\
-			walls.c				\
+			texture.c				\
+			hooks.c				\
 			raycast.c			\
 			minimap.c			\
 			game.c

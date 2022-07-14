@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 20:07:56 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/11 22:11:07 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/14 03:40:41 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	draw_ray(t_ray *ray, t_mlx *mlx)
 	info.y[1] = info.height_dr / 2 + mlx->screen.h / 2;
 	if (info.y[1] >= mlx->screen.h)
 		info.y[1] = mlx->screen.h - 1;
-	draw_ver_line_wall(mlx, ray->x, info.y, get_wall_info(mlx, ray, info));
+	draw_ver_line_wall(mlx, ray->x, info.y, get_texture_info(mlx, ray, info));
 }
 
 void	raycasting(t_mlx *mlx)
