@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 00:25:18 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/14 00:55:55 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/14 03:13:56 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	key_hook(int keycode, t_mlx *mlx)
 	if (keycode == 13 || keycode == 0 || keycode == 1 || keycode == 2)
 		player_control(mlx->map, &mlx->player, keycode);
 	if (keycode == 126 || keycode == 123 || keycode == 125 || keycode == 124)
+		player_control(mlx->map, &mlx->player, keycode);
+	if (keycode == 49)
 		player_control(mlx->map, &mlx->player, keycode);
 	do_next_frame(mlx);
 	return (0);
@@ -80,8 +82,11 @@ t_mlx	game_init(t_map *map)
 	do_next_frame(&mlx);
 	mlx_hook(mlx.win, 17, 0L, exit_hook, &mlx);
 	mlx_hook(mlx.win, 2, 1L << 0, key_hook, &mlx);
-	mlx_hook(mlx.win, 6, 1L << 0, mouse_hook, &mlx);
-	mlx_mouse_hide();
+	if (!FT_DEBUG_MOD)
+	{
+		mlx_hook(mlx.win, 6, 1L << 0, mouse_hook, &mlx);
+		mlx_mouse_hide();
+	}
 	mlx_loop(mlx.init);
 	return (mlx);
 }

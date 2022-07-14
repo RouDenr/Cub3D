@@ -6,7 +6,7 @@
 /*   By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:13:10 by vseel             #+#    #+#             */
-/*   Updated: 2022/07/23 20:55:16 by vseel            ###   ########.fr       */
+/*   Updated: 2022/07/23 21:18:36 by vseel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 char	is_valid_map_line(char *line)
 {
-	const char	allowed_chars[] = "01NSEW \n";
+	const char	allowed_chars[] = "01NSEWD \n";
 
 	if (!line)
 		return (1);
