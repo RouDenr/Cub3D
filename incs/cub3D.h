@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:48:26 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/14 03:12:47 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/14 04:20:48 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ typedef struct s_sources
 	t_img	wall_so;
 	t_img	wall_we;
 	t_img	wall_ea;
+	t_img	door;
 }				t_sources;
 
 typedef struct s_mlx
@@ -128,6 +129,10 @@ typedef struct s_mlx
 t_mlx		game_init(t_map *map);
 int			do_next_frame(t_mlx *mlx);
 
+int			exit_hook(void);
+int			mouse_hook(int x, int y, t_mlx *mlx);
+int			key_hook(int keycode, t_mlx *mlx);
+
 t_player	player_init(char **map);
 void		player_control(t_map *map, t_player *player, int keycode);
 void		player_move_right(t_map *map, t_player *player, int step);
@@ -139,8 +144,8 @@ void		ft_pixel_put(t_img *img, int x, int y, int color);
 void		draw_ver_line_wall(t_mlx *mlx, int x, int y[], t_wall wall);
 void		draw_background(t_mlx *mlx);
 
-t_img		*get_wall_by_dir(t_sources *sourcer, t_ray *ray);
-t_wall		get_wall_info(t_mlx *mlx, t_ray *ray, t_draw_info info);
+t_img		*get_texture_by_dir(t_sources *sourcer, t_ray *ray, char cell);
+t_wall		get_texture_info(t_mlx *mlx, t_ray *ray, t_draw_info info);
 
 void	init_minimap(t_mlx *mlx, t_map *map);
 

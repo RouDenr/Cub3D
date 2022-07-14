@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   walls.c                                            :+:      :+:    :+:   */
+/*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 22:10:59 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/14 00:55:30 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/14 04:22:53 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/cub3D.h"
 
-t_img	*get_wall_by_dir(t_sources *sourcer, t_ray *ray)
+t_img	*get_texture_by_dir(t_sources *sourcer, t_ray *ray, char cell)
 {
 	int	x;
 	int	y;
 
+	if (cell == 'D')
+		return (&sourcer->door);
 	x = ray->step_x;
 	y = ray->step_y;
 	if (ray->side)
@@ -30,12 +32,13 @@ t_img	*get_wall_by_dir(t_sources *sourcer, t_ray *ray)
 	return (&sourcer->wall_we);
 }
 
-t_wall	get_wall_info(t_mlx *mlx, t_ray *ray, t_draw_info info)
+t_wall	get_texture_info(t_mlx *mlx, t_ray *ray, t_draw_info info)
 {
 	float	wall_x;
 	t_wall	wall_info;
 
-	wall_info.img = get_wall_by_dir(&mlx->sources, ray);
+	wall_info.img = get_texture_by_dir(&mlx->sources, ray,
+			mlx->map->map_arr[ray->map_y][ray->map_x]);
 	if (ray->side == 0)
 		wall_x = mlx->player.y + info.w_dist * ray->ray_y;
 	else
