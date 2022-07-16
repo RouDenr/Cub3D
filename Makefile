@@ -6,7 +6,7 @@
 #    By: decordel <decordel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 21:18:07 by decordel          #+#    #+#              #
-#    Updated: 2022/07/14 04:29:43 by decordel         ###   ########.fr        #
+#    Updated: 2022/07/16 21:19:26 by decordel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ O		=	objs
 I		=	incs/
 D		=	deps
 
-NAME	=	cub3D
+NAME		=	cub3D
+NAME_BONUS	=	cub3D_bonus
 
 SRCS	=	main.c				\
 			mlx_init.c			\
@@ -23,12 +24,22 @@ SRCS	=	main.c				\
 			player_controller.c	\
 			player_move.c		\
 			draw.c				\
-			texture.c				\
+			texture.c			\
 			hooks.c				\
 			raycast.c			\
-			minimap.c			\
 			game.c
 
+SRCS_BONUS	=	main.c						\
+			mlx_init_bonus.c			\
+			player.c					\
+			player_controller_bonus.c	\
+			player_move.c				\
+			draw.c						\
+			texture.c					\
+			hooks_bonus.c				\
+			raycast.c					\
+			minimap.c					\
+			game_bonus.c
 
 CC		=	clang
 
@@ -36,9 +47,13 @@ CFLAGS	=	-Wall -Wextra -g
 # CFLAGS	=	-Wall -Wextra -Werror
 
 SRCS	:=	$(foreach file,$(SRCS),$S$(file))
+SRCS_BONUS	:=	$(foreach file,$(SRCS_BONUS),$S$(file))
 
-OBJS	=	$(SRCS:$S%.c=$O/%.o)
-DEPS	=	$(SRCS:$S%.c=$D/%.d)
+OBJS		=	$(SRCS:$S%.c=$O/%.o)
+OBJS_BONUS	=	$(SRCS_BONUS:$S%.c=$O/%.o)
+
+DEPS		=	$(SRCS:$S%.c=$D/%.d)
+DEPS_BONUS	=	$(SRCS_BONUS:$S%.c=$D/%.d)
 
 LDFLAGS	:= -framework OpenGL -framework AppKit
 
@@ -66,6 +81,15 @@ PREFIX	:=	$(MAKELEVEL)>>
 all			: $(DEPS) $(NAME)
 
 $(NAME)		: $(LIB_AR) $(MLX_AR) $(PARS_AR) $(OBJS)
+	@echo "\n$(PREFIX) Building binary "
+	@$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
+	@echo "$(PREFIX) Done! \n"
+#-------------
+
+bonus		:	$(DEPS_BONUS) $(NAME_BONUS)
+#-------------
+
+$(NAME_BONUS)		: $(LIB_AR) $(MLX_AR) $(PARS_AR) $(OBJS_BONUS)
 	@echo "\n$(PREFIX) Building binary "
 	@$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
 	@echo "$(PREFIX) Done! \n"
@@ -101,6 +125,7 @@ clean:
 fclean		: clean
 	@echo "\n$(PREFIX) Cleaning cub3d binary "
 	@$(RM) $(NAME)
+	@$(RM) $(NAME_BONUS)
 	@echo "$(PREFIX) Done! \n"
 	@echo "\n$(PREFIX) Cleaning cub3d *.d files "
 	@$(RM) $D
