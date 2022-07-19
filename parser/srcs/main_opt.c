@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_opt.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:13:10 by vseel             #+#    #+#             */
-/*   Updated: 2022/07/11 22:20:34 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/19 22:48:26 by vseel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,17 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (throw_error("one argument excepted", 0, 'm'));
-
 	ft_memset(&map, 0, sizeof map);
 	map.color_ceil = -2;
 	map.color_floor = -2;
-
 	if (!parse_main(argv[1], &map))
 		return (1);
-
 	ft_lstclear_dyarr(&map.map_arr_l, destroy_dyarr_struc);
 	free(map.wall_no);
 	free(map.wall_so);
 	free(map.wall_we);
 	free(map.wall_ea);
 	return (0);
-
 }
 
 /*

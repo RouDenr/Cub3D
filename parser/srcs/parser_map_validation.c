@@ -6,7 +6,7 @@
 /*   By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:13:10 by vseel             #+#    #+#             */
-/*   Updated: 2022/07/09 19:28:54 by vseel            ###   ########.fr       */
+/*   Updated: 2022/07/19 23:31:07 by vseel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,11 @@ char	is_valid_map_line(char *line)
 
 char	get_texture_path(char **tmp, char **wall)
 {
+	if (double_arr_size(tmp) != 2 || tmp[1][0] == '\n')
+	{
+		double_arr_free(tmp);
+		return (throw_error("invalid config texture line", 0, 'm'));
+	}
 	if (*wall)
 	{
 		double_arr_free(tmp);
@@ -70,7 +75,10 @@ char	get_texture_path(char **tmp, char **wall)
 	}
 	*wall = ft_substr(tmp[1], 0, ft_strlen(tmp[1]) - 1);
 	if (!*wall)
+	{
+		double_arr_free(tmp);
 		return (throw_error("strdup failed", 0, 'm'));
+	}
 	return (1);
 }
 
@@ -103,7 +111,7 @@ int	parse_color(char *str)
 		|| !is_valid_color_str(colors_str[2]))
 	{
 		double_arr_free(colors_str);
-		return (throw_error("invalid config line", -1, 'm'));
+		return (throw_error("invalid config color line", -1, 'm'));
 	}
 	colors[0] = ft_atoi(colors_str[0]);
 	colors[1] = ft_atoi(colors_str[1]);

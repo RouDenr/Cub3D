@@ -6,7 +6,7 @@
 /*   By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:13:10 by vseel             #+#    #+#             */
-/*   Updated: 2022/07/09 19:34:22 by vseel            ###   ########.fr       */
+/*   Updated: 2022/07/19 23:35:23 by vseel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ t_dyarr	*create_n_push_list(t_dyarr **arr_head, char *line)
 	return (*arr_head);
 }
 
+/**
+ * @param m is for map
+*/
 char	is_vaild_near_cells(char **m, int i, int j)
 {
 	return (((m[i][j - 1] != '1' && m[i][j - 1] != '0' && m[i][j - 1] != 'N'
@@ -133,6 +136,9 @@ int	parse_main(char *map_file, t_map *map)
 		free (line);
 		line = get_next_line(map_fd);
 	}
+	if (map->color_ceil == -2 || map->color_floor == -2 || !map->wall_no
+		 || !map->wall_so  || !map->wall_we  || !map->wall_ea)
+		return (throw_error("invalid config line", 0, 'm'));
 	while (line)
 	{
 		if (!is_valid_map_line(line))
