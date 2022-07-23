@@ -6,49 +6,19 @@
 /*   By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:13:10 by vseel             #+#    #+#             */
-/*   Updated: 2022/07/19 23:31:07 by vseel            ###   ########.fr       */
+/*   Updated: 2022/07/23 20:55:16 by vseel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/parser.h"
 #include "../libft/libft.h"
 
-int	double_arr_size(char **strs)
-{
-	int	size;
-
-	size = 0;
-	if (!strs)
-		return (-1);
-	while (*strs)
-	{
-		++strs;
-		++size;
-	}
-	return (size);
-}
-
-void	double_arr_free(char **strs)
-{
-	char	*to_free;
-	char	**to_free_head;
-
-	if (!strs)
-		return ;
-	to_free_head = strs;
-	while (*strs)
-	{
-		to_free = *strs;
-		++strs;
-		free(to_free);
-	}
-	free(to_free_head);
-}
-
 char	is_valid_map_line(char *line)
 {
 	const char	allowed_chars[] = "01NSEW \n";
 
+	if (!line)
+		return (1);
 	if (!line || *line == '\n')
 		return (0);
 	while (*line)
@@ -60,124 +30,49 @@ char	is_valid_map_line(char *line)
 	return (1);
 }
 
-char	get_texture_path(char **tmp, char **wall)
+/**
+ * @param m is for map
+*/
+char	is_vaild_near_cells(char **m, int i, int j)
 {
-	if (double_arr_size(tmp) != 2 || tmp[1][0] == '\n')
-	{
-		double_arr_free(tmp);
-		return (throw_error("invalid config texture line", 0, 'm'));
-	}
-	if (*wall)
-	{
-		double_arr_free(tmp);
-		return (throw_error("invalid config line: dublicated instruction",
-				0, 'm'));
-	}
-	*wall = ft_substr(tmp[1], 0, ft_strlen(tmp[1]) - 1);
-	if (!*wall)
-	{
-		double_arr_free(tmp);
-		return (throw_error("strdup failed", 0, 'm'));
-	}
-	return (1);
-}
-
-int	is_valid_color_str(char *str)
-{
-	int	length;
-
-	length = ft_strlen(str);
-	if (str[length - 1] == '\n')
-		str[length-- - 1] = 0;
-	if (length > 3 || length == 0)
-		return (0);
-	while (--length != -1)
-		if (str[length] < '0' || str[length] > '9')
-			return (0);
-	return (1);
-}
-
-int	parse_color(char *str)
-{
-	char	**colors_str;
-	int		colors[3];
-
-	colors_str = ft_split(str, ',');
-	if (!colors_str)
-		return (throw_error("parse_color", -1, 'm'));
-	if (double_arr_size(colors_str) != 3
-		|| !is_valid_color_str(colors_str[0])
-		|| !is_valid_color_str(colors_str[1])
-		|| !is_valid_color_str(colors_str[2]))
-	{
-		double_arr_free(colors_str);
-		return (throw_error("invalid config color line", -1, 'm'));
-	}
-	colors[0] = ft_atoi(colors_str[0]);
-	colors[1] = ft_atoi(colors_str[1]);
-	colors[2] = ft_atoi(colors_str[2]);
-	double_arr_free(colors_str);
-	if (colors[0] > 255 || colors[0] < 0
-		|| colors[1] > 255 || colors[1] < 0
-		|| colors[2] > 255 || colors[2] < 0)
-		return (throw_error("Colors allowed from 0 to 255 inc", -1, 'm'));
-
-	// TODO get this onto separate func
-	if (VISUALIZE_MAP)
-	{
-		showbits(colors[0]);
-		showbits(colors[1]);
-		showbits(colors[2]);
-		showbits((colors[0] << 16) | (colors[1] << 8) | colors[2]);
-	}
-	return ((colors[0] << 16) | (colors[1] << 8) | colors[2]);
+	return (((m[i][j - 1] != '1' && m[i][j - 1] != '0' && m[i][j - 1] != 'N'
+			&& m[i][j - 1] != 'S' && m[i][j - 1] != 'E' && m[i][j - 1] != 'W')
+			|| (m[i][j + 1] != '1' && m[i][j + 1] != '0' && m[i][j + 1] != 'N'
+			&& m[i][j + 1] != 'S' && m[i][j + 1] != 'E' && m[i][j + 1] != 'W')
+			|| (m[i - 1][j] != '1' && m[i - 1][j] != '0' && m[i - 1][j] != 'N'
+			&& m[i - 1][j] != 'S' && m[i - 1][j] != 'E' && m[i - 1][j] != 'W')
+			|| (m[i + 1][j] != '1' && m[i + 1][j] != '0' && m[i + 1][j] != 'N'
+		&& m[i + 1][j] != 'S' && m[i + 1][j] != 'E' && m[i + 1][j] != 'W')));
 }
 
 /**
- * @param color should be initialised as -2
+ * @param m is alias for `map->map_arr`
 */
-char	get_color(char **tmp, int *color)
+char	is_valid_map(t_map *map)
 {
-	if (*color != -2)
-	{
-		double_arr_free(tmp);
-		return (throw_error("invalid config line: dublicated instruction",
-				0, 'm'));
-	}
-	*color = parse_color(tmp[1]);
-	if (*color == -1)
-		return (0);
-	return (1);
-}
+	int		i;
+	int		j;
+	char	is_player_here;
+	char	**m;
 
-char	parse_config_line(char *line, t_map *map)
-{
-	char	**tmp;
-
-	if (*line == '\n')
-		return (1);
-	tmp = ft_split(line, ' ');
-	if (!tmp)
-		return (throw_error("split failed", 0, 'm'));
-	if (double_arr_size(tmp) != 2)
+	i = 0;
+	is_player_here = 0;
+	m = map->map_arr;
+	while (m[++i])
 	{
-		double_arr_free(tmp);
-		return (throw_error("invalid config line", 0, 'm'));
+		j = -1;
+		while (m[i][++j])
+		{
+			if (m[i][j] != '1' && m[i][j] != ' ' && m[i][j] != '\n'
+			&& is_vaild_near_cells(m, i, j))
+				return (throw_error("map: map can't be unclosed", 0, 'm'));
+			if ((m[i][j] == 'N' || m[i][j] == 'S'
+			|| m[i][j] == 'E' || m[i][j] == 'W') && is_player_here++)
+				return (throw_error("map: there is can be only one player char",
+						0, 'm'));
+		}
 	}
-	if (!ft_strncmp("NO", tmp[0], 2) && !get_texture_path(tmp, &map->wall_no))
-		return (0);
-	else if (!ft_strncmp("SO", tmp[0], 2) && !get_texture_path(tmp, &map->wall_so))
-		return (0);
-	else if (!ft_strncmp("WE", tmp[0], 2) && !get_texture_path(tmp, &map->wall_we))
-		return (0);
-	else if (!ft_strncmp("EA", tmp[0], 2) && !get_texture_path(tmp, &map->wall_ea))
-		return (0);
-	else if (!ft_strncmp("F", tmp[0], 1) && !get_color(tmp, &map->color_floor))
-		return (0);
-	else if (!ft_strncmp("C", tmp[0], 1) && !get_color(tmp, &map->color_ceil))
-		return (0);
-	free(tmp[0]);
-	free(tmp[1]);
-	free(tmp);
+	if (!is_player_here)
+		return (throw_error("map: no player char on map", 0, 'm'));
 	return (1);
 }
