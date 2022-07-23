@@ -1,0 +1,9 @@
+NO ./texture/n_wall.xpm
+SO ./texture/s_wall.xpm
+WE ./texture/w_wall.xpm
+EA ./texture/e_wall.xpm
+
+F 100,100,100
+C 100,100,100
+
+
