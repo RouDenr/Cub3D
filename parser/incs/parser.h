@@ -6,7 +6,7 @@
 /*   By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:13:05 by vseel             #+#    #+#             */
-/*   Updated: 2022/07/09 20:05:57 by vseel            ###   ########.fr       */
+/*   Updated: 2022/07/23 20:55:56 by vseel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int		parse_main(char *map_file, t_map *map);
 
 /* parser_exit_utils */
 int		throw_error(char *msg, int exit_code, char mode);
+char	double_arr_free(char **strs);
+char	map_free(t_map *map);
 
 /* parser_debug_utils */
 void	showbits(unsigned int x);
@@ -63,10 +65,16 @@ void	visualize_dyarr(t_dyarr *arr);
 void	visualize_map(t_map map);
 
 /* parser_map_validation */
-int		double_arr_size(char **strs);
-void	double_arr_free(char **strs);
 char	is_valid_map_line(char *line);
 char	parse_config_line(char *line, t_map *map);
+char	is_valid_map(t_map *map);
+
+/* parser_map */
+int		double_arr_size(char **strs);
+char	parse_config_line(char *line, t_map *map);
+
+/* parser_color_validation */
+char	get_color(char **tmp, int *color);
 
 /* parser_file_utils */
 int		is_cub_extention(char *filename);

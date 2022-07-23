@@ -6,7 +6,7 @@
 #    By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/30 21:34:46 by vseel             #+#    #+#              #
-#    Updated: 2022/07/10 19:03:13 by vseel            ###   ########.fr        #
+#    Updated: 2022/07/23 20:56:36 by vseel            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,11 @@ NAME	=	parser.a
 NAME_BIN=	parser
 
 SRCS	=	parser.c					\
+			parser_map.c				\
 			parser_debug_utils.c		\
 			parser_exit_utils.c			\
 			parser_map_validation.c		\
+			parser_color_validation.c	\
 			parser_file_utils.c			\
 			lstfuncs_dyarr_1.c			\
 			lstfuncs_dyarr_2.c
@@ -114,7 +116,7 @@ libft:
 
 # Run shell tests for parcer
 test_sh:
-	@bash tests/run_tests.sh
+	@bash tests/run_tests.sh $(CHLEAKS)
 #-------------
 
 ifeq ($(MAKECMDGOALS),fclean)
