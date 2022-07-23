@@ -6,7 +6,7 @@
 /*   By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:13:10 by vseel             #+#    #+#             */
-/*   Updated: 2022/06/22 22:20:30 by vseel            ###   ########.fr       */
+/*   Updated: 2022/07/23 18:02:04 by vseel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,4 @@ int	is_cub_extention(char *filename)
 		&& filename[size - 1] == 'b')
 		return (1);
 	return (throw_error("wrong extention. \".cub\" expected", 0, 'm'));
-	
 }

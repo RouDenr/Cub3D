@@ -6,7 +6,7 @@
 /*   By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 11:17:41 by vseel             #+#    #+#             */
-/*   Updated: 2022/06/30 22:39:21 by vseel            ###   ########.fr       */
+/*   Updated: 2022/07/23 20:23:31 by vseel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ t_dyarr	*ft_lstnew_dyarr(char *content)
 	return (node);
 }
 
-// void	ft_lstadd_back_dyarr(t_dyarr **lst, t_dyarr *new)
 t_dyarr	*ft_lstadd_back_dyarr(t_dyarr **lst, t_dyarr *new)
 {
 	t_dyarr	*tmp;
@@ -70,16 +69,16 @@ void	ft_lstdelone_dyarr(t_dyarr *lst, void (*del)(void *))
 
 void	ft_lstclear_dyarr(t_dyarr **lst, void (*del)(void *))
 {
-	t_dyarr	*p;
+	t_dyarr	*elem;
 
 	if (!lst || !del)
 		return ;
-	p = *lst;
-	while (p)
+	elem = *lst;
+	while (elem)
 	{
 		*lst = (*lst)->next;
-		ft_lstdelone_dyarr(p, del);
-		p = *lst;
+		ft_lstdelone_dyarr(elem, del);
+		elem = *lst;
 	}
 	lst = NULL;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_debug_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:13:10 by vseel             #+#    #+#             */
-/*   Updated: 2022/07/01 00:46:43 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/23 20:29:30 by vseel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	showbits(unsigned int x)
 {
-	int i;
+	int	i;
 
 	i = (sizeof(int) * 8) - 1;
 	while (i >= 0)
