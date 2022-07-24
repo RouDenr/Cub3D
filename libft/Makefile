@@ -6,7 +6,7 @@
 #    By: decordel <decordel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/06 10:40:48 by decordel          #+#    #+#              #
-#    Updated: 2022/05/18 17:24:20 by decordel         ###   ########.fr        #
+#    Updated: 2022/07/24 19:20:44 by decordel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRCS	=	ft_atoi.c		ft_bzero.c		ft_calloc.c		ft_isalnum.c\
 
 OBJS	=	${SRCS:%.c=%.o}
 
-FLAGS	=	-g -Wall -Wextra -Werror
+FLAGS	=	-Wall -Wextra -Werror
 
 all		:	${NAME}
 

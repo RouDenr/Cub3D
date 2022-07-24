@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   hooks_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 04:19:27 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/14 04:21:26 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/24 19:25:03 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ int	exit_hook(void)
 int	mouse_hook(int x, int y, t_mlx *mlx)
 {
 	(void) y;
-	if (x > FT_WIN_W_CENTER)
+	if (x > FT_WIN_W / 2)
 		player_control(mlx->map, &mlx->player, -25);
-	if (x < FT_WIN_W_CENTER)
+	if (x < FT_WIN_W / 2)
 		player_control(mlx->map, &mlx->player, 25);
-	mlx_mouse_move(mlx->win, FT_WIN_W_CENTER, FT_WIN_H_CENTER);
+	mlx_mouse_move(mlx->win, FT_WIN_W / 2, FT_WIN_H / 2);
 	do_next_frame(mlx);
 	return (0);
 }

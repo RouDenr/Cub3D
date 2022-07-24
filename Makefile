@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+         #
+#    By: decordel <decordel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 21:18:07 by decordel          #+#    #+#              #
-#    Updated: 2022/07/24 18:01:49 by vseel            ###   ########.fr        #
+#    Updated: 2022/07/24 19:20:19 by decordel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,8 +43,7 @@ SRCS_BONUS	=	main.c					\
 
 CC		=	clang
 
-CFLAGS	=	-Wall -Wextra -g
-# CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror
 
 SRCS	:=	$(foreach file,$(SRCS),$S$(file))
 SRCS_BONUS	:=	$(foreach file,$(SRCS_BONUS),$S$(file))
@@ -173,34 +172,6 @@ mlx:
 	@$(MAKE) -C $(MLX_DIR) -j 4 -s
 	@echo "$(PREFIX) Done! \n"
 #-------------
-
-
-#! debug ---------------------------------
-MESS	=
-
-ARGS	= maps/test.cub
-
-git		:
-	git add .
-	git commit -m "$(MESS)"
-
-do		:
-	make all -s
-	./$(NAME) $(ARGS)
-
-leaks	:
-	make all
-	leaks -atExit -- ./$(NAME) $(ARGS)
-
-debug	:
-	make all
-	lldb -- ./$(NAME) $(ARGS)
-
-norm	:
-	clear
-	norminette srcs/ | grep Er
-
-#! debug ---------------------------------
 
 ifeq ($(MAKECMDGOALS),fclean)
 else ifeq ($(MAKECMDGOALS),clean)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:48:26 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/24 15:52:05 by vseel            ###   ########.fr       */
+/*   Updated: 2022/07/24 19:23:21 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,12 @@
 #  define FT_WIN_H 1080
 # endif
 
-# ifndef FT_WIN_H_CENTER
-#  define FT_WIN_H_CENTER FT_WIN_H / 2
-# endif
-
 # ifndef FT_WIN_W
 #  define FT_WIN_W 1920
 # endif
 
 # ifndef FT_DEBUG_MOD
 #  define FT_DEBUG_MOD 1
-# endif
-
-# ifndef FT_WIN_W_CENTER
-#  define FT_WIN_W_CENTER FT_WIN_W / 2
 # endif
 
 # include "../libft/libft.h"
