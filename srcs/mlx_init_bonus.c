@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 00:25:18 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/16 21:18:07 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/24 16:37:43 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	sources_init(t_mlx *mlx, t_map *map)
 	mlx->sources.wall_no = init_texture(mlx, map->wall_no);
 	mlx->sources.wall_so = init_texture(mlx, map->wall_so);
 	mlx->sources.wall_we = init_texture(mlx, map->wall_we);
-
 	//! mlx->sources.door = init_texture(mlx, map->door);
 	mlx->sources.door = init_texture(mlx, "./texture/door.xpm");
 	mlx->screen.img = mlx_new_image(mlx->init, FT_WIN_W, FT_WIN_H);
@@ -59,11 +58,8 @@ t_mlx	game_init(t_map *map)
 	do_next_frame(&mlx);
 	mlx_hook(mlx.win, 17, 0L, exit_hook, &mlx);
 	mlx_hook(mlx.win, 2, 1L << 0, key_hook, &mlx);
-	// if (FT_BONUS)
-	// {
-		mlx_hook(mlx.win, 6, 1L << 0, mouse_hook, &mlx);
-		mlx_mouse_hide();
-	// }
+	mlx_hook(mlx.win, 6, 1L << 0, mouse_hook, &mlx);
+	mlx_mouse_hide();
 	mlx_loop(mlx.init);
 	return (mlx);
 }
