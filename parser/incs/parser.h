@@ -6,7 +6,7 @@
 /*   By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:13:05 by vseel             #+#    #+#             */
-/*   Updated: 2022/07/23 20:55:56 by vseel            ###   ########.fr       */
+/*   Updated: 2022/07/24 16:00:11 by vseel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ char	get_color(char **tmp, int *color);
 
 /* parser_file_utils */
 int		is_cub_extention(char *filename);
-
-/* map functions */
 
 /* dyarr list functions */
 t_dyarr	*ft_lstnew_dyarr(char *content);
