@@ -6,72 +6,57 @@
 #    By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/30 21:34:46 by vseel             #+#    #+#              #
-#    Updated: 2022/07/24 18:02:15 by vseel            ###   ########.fr        #
+#    Updated: 2022/07/23 20:56:36 by vseel            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-S		:=	srcs/
-O		:=	objs
-I		:=	incs/
-D		:=	deps
+S		=	srcs/
+O		=	objs
+I		=	incs/
+D		=	deps
 
-NAME		:=	parser.a
-NAME_BONUS	:=	parser_bonus.a
-NAME_BIN	:=	parser
+NAME	=	parser.a
+NAME_BIN=	parser
 
-SRCS	:=	parser.c					\
+SRCS	=	parser.c					\
 			parser_map.c				\
 			parser_debug_utils.c		\
 			parser_exit_utils.c			\
+			parser_map_validation.c		\
 			parser_color_validation.c	\
 			parser_file_utils.c			\
 			lstfuncs_dyarr_1.c			\
 			lstfuncs_dyarr_2.c
 
-ifeq ($(BONUS),1)
-SRCS	+=	parser_map_validation_bonus.c
-else
-SRCS	+=	parser_map_validation.c
-endif
-
-ifeq ($(MAKECMDGOALS),binary)
 SRCS	+=	main_opt.c
-endif
 
-CC		:=	clang
+CC		=	clang
 
-# CFLAGS	:=	-Wall -Wextra -g
-CFLAGS	:=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -g
+# CFLAGS	=	-Wall -Wextra -Werror
 
 SRCS	:=	$(foreach file,$(SRCS),$S$(file))
 
-OBJS	:=	$(SRCS:$S%.c=$O/%.o)
-DEPS	:=	$(SRCS:$S%.c=$D/%.d)
+OBJS	=	$(SRCS:$S%.c=$O/%.o)
+DEPS	=	$(SRCS:$S%.c=$D/%.d)
 
 LIB_DIR	:=	libft
 LIB_AR	:=	$(LIB_DIR)/libft.a
 
-AR		:=	ar rcs
+AR		=	ar rcs
 
-RM		:=	rm -rf
+RM		=	rm -rf
 
 PREFIX	:=	$(MAKELEVEL)>>
 
-.PHONY: all bonus clean fclean re pack binary libft test_sh
+.PHONY: all clean fclean re pack binary libft test_sh
 
-# Building parser archive for cub3D binary
+# Building parser archive for minishell binary
 all			: $(DEPS) $(NAME)
-
-bonus		: $(DEPS) $(NAME_BONUS)
 
 $(NAME)		: $(OBJS) $(LIB_AR)
 	@echo "\n$(PREFIX) Building parser archive "
-	@$(AR) $(NAME) $(OBJS) $(LIB_AR)
-	@echo "$(PREFIX) Done! \n"
-
-$(NAME_BONUS)	: $(OBJS) $(LIB_AR)
-	@echo "\n$(PREFIX) Building parser bonus archive "
-	@$(AR) $(NAME_BONUS) $(OBJS) $(LIB_AR)
+	@$(AR) $(NAME) $(filter-out $O/main_opt.o,$(OBJS)) $(LIB_AR)
 	@echo "$(PREFIX) Done! \n"
 #-------------
 
@@ -102,7 +87,7 @@ clean:
 
 fclean		: clean
 	@echo "\n$(PREFIX) Cleaning parcer binary and archive "
-	@$(RM) $(NAME) $(NAME_BIN) $(NAME_BONUS)
+	@$(RM) $(NAME) $(NAME_BIN)
 	@echo "$(PREFIX) Done! \n"
 	@echo "\n$(PREFIX) Cleaning parcer *.d files "
 	@$(RM) $D

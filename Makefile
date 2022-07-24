@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+         #
+#    By: decordel <decordel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 21:18:07 by decordel          #+#    #+#              #
-#    Updated: 2022/07/24 18:01:49 by vseel            ###   ########.fr        #
+#    Updated: 2022/07/16 21:19:26 by decordel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRCS	=	main.c				\
 			raycast.c			\
 			game.c
 
-SRCS_BONUS	=	main.c					\
+SRCS_BONUS	=	main.c						\
 			mlx_init_bonus.c			\
 			player.c					\
 			player_controller_bonus.c	\
@@ -58,18 +58,17 @@ DEPS_BONUS	=	$(SRCS_BONUS:$S%.c=$D/%.d)
 LDFLAGS	:= -framework OpenGL -framework AppKit
 
 MLX_DIR	:=	minilibx
+# MLX_DIR	:=	minilibx_swift
+# MLX_DIR	:=	minilibx_sources
 MLX_AR	:=	$(MLX_DIR)/libmlx.a
+# MLX_FLAGS	:= -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 
 PARS_DIR:=	parser
 PARS_AR	:=	$(PARS_DIR)/parser.a
-PARS_AR_BONUS	:=	$(PARS_DIR)/parser_bonus.a
-
-ifeq ($(MAKECMDGOALS),bonus)
-export BONUS=1
-endif
 
 LIB_DIR	:=	libft
 LIB_AR	:=	$(LIB_DIR)/libft.a
+# LIB_FLAGS	:= -L$(LIB_DIR) -lft
 
 AR		=	ar rcs
 
@@ -77,7 +76,7 @@ RM		=	rm -rf
 
 PREFIX	:=	$(MAKELEVEL)>>
 
-.PHONY: all clean fclean re pack binary libft parser parser_bonus do debug leaks norm git
+.PHONY: all clean fclean re pack binary libft parser do debug leaks norm git
 
 all			: $(DEPS) $(NAME)
 
@@ -90,8 +89,8 @@ $(NAME)		: $(LIB_AR) $(MLX_AR) $(PARS_AR) $(OBJS)
 bonus		:	$(DEPS_BONUS) $(NAME_BONUS)
 #-------------
 
-$(NAME_BONUS)		: $(LIB_AR) $(MLX_AR) $(PARS_AR_BONUS) $(OBJS_BONUS)
-	@echo "\n$(PREFIX) Building bonus binary "
+$(NAME_BONUS)		: $(LIB_AR) $(MLX_AR) $(PARS_AR) $(OBJS_BONUS)
+	@echo "\n$(PREFIX) Building binary "
 	@$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
 	@echo "$(PREFIX) Done! \n"
 #-------------
@@ -138,6 +137,15 @@ fclean		: clean
 re			: fclean all
 #-------------
 
+# # Building parser archive for minishell binary
+# binary		: $(NAME_BIN) $(DEPS)
+
+# $(NAME_BIN)	: $(OBJS)
+# 	@echo "\n$(PREFIX) Building parser binary "
+# 	@$(CC) $(CFLAGS) -Llibft -lft $^ -o $@
+# 	@echo "$(PREFIX) Done! \n"
+# #-------------
+
 # Building libft
 $(LIB_AR)	: libft ;
 
@@ -156,21 +164,13 @@ parser	:
 	@echo "$(PREFIX) Done! \n"
 #-------------
 
-# Building parser bonus
-$(PARS_AR_BONUS)	: parser_bonus ;
-
-parser_bonus	:
-	@echo "\n$(PREFIX) Invoking parser bonus makefile"
-	@$(MAKE) bonus -C $(PARS_DIR) -j 4
-	@echo "$(PREFIX) Done! \n"
-#-------------
-
 # Building mlx
 $(MLX_AR)	: mlx ;
 
 mlx:
 	@echo "\n$(PREFIX) Invoking mlx makefile"
-	@$(MAKE) -C $(MLX_DIR) -j 4 -s
+	# @$(MAKE) -C $(MLX_DIR) -j 4
+	@$(MAKE) -C $(MLX_DIR)
 	@echo "$(PREFIX) Done! \n"
 #-------------
 

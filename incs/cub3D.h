@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vseel <vseel@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:48:26 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/24 15:52:05 by vseel            ###   ########.fr       */
+/*   Updated: 2022/07/14 04:20:48 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,13 @@ typedef struct s_img
 	int		endian;
 }			t_img;
 
-typedef struct s_player_dir
+typedef	struct s_player_dir
 {
 	float	x;
 	float	y;
 	float	plane_x;
 	float	plane_y;
-}			t_player_dir;
+} t_player_dir;
 
 typedef struct s_mouse
 {
@@ -91,20 +91,21 @@ typedef struct s_ray
 
 }			t_ray;
 
-typedef struct s_draw_info
+typedef struct	s_draw_info
 {
 	int			height_dr;
 	int			y[2];
 	float		w_dist;
 }				t_draw_info;
 
-typedef struct s_wall
+typedef struct	s_wall
 {
 	t_img	*img;
 	float	tex_x;
 	float	tex_y[2];
 	float	step;
 }				t_wall;
+
 
 typedef struct s_sources
 {
@@ -146,8 +147,8 @@ void		draw_background(t_mlx *mlx);
 t_img		*get_texture_by_dir(t_sources *sourcer, t_ray *ray, char cell);
 t_wall		get_texture_info(t_mlx *mlx, t_ray *ray, t_draw_info info);
 
-void		init_minimap(t_mlx *mlx, t_map *map);
+void	init_minimap(t_mlx *mlx, t_map *map);
 
-int			print_log_ray(int keycode, t_ray *ray);
+int	print_log_ray(int keycode, t_ray *ray);
 
 #endif
