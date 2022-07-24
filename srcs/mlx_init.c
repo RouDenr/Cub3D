@@ -6,7 +6,7 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 00:25:18 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/24 16:36:33 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/24 19:16:21 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ int	sources_init(t_mlx *mlx, t_map *map)
 	mlx->sources.wall_no = init_texture(mlx, map->wall_no);
 	mlx->sources.wall_so = init_texture(mlx, map->wall_so);
 	mlx->sources.wall_we = init_texture(mlx, map->wall_we);
-	//! mlx->sources.door = init_texture(mlx, map->door);
-	mlx->sources.door = init_texture(mlx, "./texture/door.xpm");
 	mlx->screen.img = mlx_new_image(mlx->init, FT_WIN_W, FT_WIN_H);
 	mlx->screen.addr = mlx_get_data_addr(mlx->screen.img,
 			&mlx->screen.bits_per_pixel,

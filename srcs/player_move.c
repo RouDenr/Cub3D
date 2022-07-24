@@ -6,16 +6,16 @@
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 00:52:05 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/14 03:04:22 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/24 18:32:48 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/cub3D.h"
 #ifndef FT_ROTATE_SPEED
-# define FT_ROTATE_SPEED .05f
+# define FT_ROTATE_SPEED .025f
 #endif
 #ifndef FT_STEP_SPEED
-# define FT_STEP_SPEED .10f
+# define FT_STEP_SPEED .05f
 #endif
 
 void	player_move_right(t_map *map, t_player *player, int step)

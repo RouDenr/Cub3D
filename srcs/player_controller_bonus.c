@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_controller.c                                :+:      :+:    :+:   */
+/*   player_controller_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: decordel <decordel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 00:52:05 by decordel          #+#    #+#             */
-/*   Updated: 2022/07/14 03:16:46 by decordel         ###   ########.fr       */
+/*   Updated: 2022/07/24 18:45:17 by decordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void	try_open_door(t_map *map, t_player *player)
 	x = (int)(player->x + player->dir.x * .1f);
 	y = (int)(player->y + player->dir.y * .1f);
 	cell = map->map_arr[y][x];
-	printf("%c\n", cell);
-	printf("%s\n", map->map_arr[y]);
 	if (cell == 'D')
 		map->map_arr[y][x] = '0';
 }
